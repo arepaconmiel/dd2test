@@ -1,0 +1,6 @@
+
+<?php if(intval($block->displayRewardPoints() != 0)) : ?>
+<div id="reward_points_checkout"> 
+	<?php echo sprintf(__('You earned %s for the order you just placed. The points you earned are currently pending the completion of your order. You will be able to spend these points after we finish processing your order.'), $block->displayRewardPoints()) ?>		
+</div>
+<?php endif; ?>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Qxd_ExportData::reports" title="QXD Reports" module="Qxd_ExportData" sortOrder="25" parent="Magento_Reports::report" resource="Qxd_ExportData::reports"/>
+        <add id="Qxd_ExportData::description" title="Description Report" module="Qxd_ExportData" sortOrder="10" action="qxd_report/description" resource="Qxd_ExportData::description" parent="Qxd_ExportData::reports"/>
+        <add id="Qxd_ExportData::image" title="Image Report" module="Qxd_ExportData" sortOrder="20" parent="Qxd_ExportData::reports" action="qxd_report/image" resource="Qxd_ExportData::image"/>
+    </menu>
+</config>

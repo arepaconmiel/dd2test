@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<body>
+    <referenceContainer name="columns.top">
+        <block class="Qxd\Rewardpoints\Block\Rewardpoints"
+               name="check.rewardpoints"
+               template="Qxd_Rewardpoints::checkout_rewardpoints.phtml" before="-">
+        </block>
+    </referenceContainer>
+</body>

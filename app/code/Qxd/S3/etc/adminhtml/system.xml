@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+        <system>
+            <section id="s3_options" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>S3 Integration</label>
+                <tab>qxd</tab>
+                <resource>Qxd_S3::config</resource>
+                <group id="configure_s3" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>S3 settings</label>
+                    
+                    <field id="s3_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="s3_key" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Key</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="s3_secret" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Secret</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="s3_bucket" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Bucket</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="s3_region" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Region</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="s3_sync_media" translate="label" type="button" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Synchronize Media</label>
+                        <frontend_model>Qxd\S3\Block\System\Config\Form\S3mediabutton</frontend_model>
+                    </field>
+
+                    <field id="s3_sync_wysiwyg" translate="label" type="button" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Synchronize wysiwyg</label>
+                        <frontend_model>Qxd\S3\Block\System\Config\Form\S3wysiwygbutton</frontend_model>
+                    </field>
+                </group>
+            </section>
+        </system>
+    </config>
+

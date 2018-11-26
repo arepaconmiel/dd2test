@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+        <system>
+            <tab id="qxd" translate="label" sortOrder="50">
+                <label>QXD</label>
+            </tab>
+            <section id="memcached_options" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Memcached Integration</label>
+                <tab>qxd</tab>
+                <resource>Qxd_Memcached::config</resource>
+                <group id="configure_memcached" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>General Configuration</label>
+                    
+                    <field id="memcached_host" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Host</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="memcached_port" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Port</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="emailsreport_generate_reports" translate="label" type="button" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Clear memcached</label>
+                        <frontend_model>Qxd\Memcached\Block\System\Config\Clearblock</frontend_model>
+                    </field>
+                </group>
+            </section>
+        </system>
+    </config>
+

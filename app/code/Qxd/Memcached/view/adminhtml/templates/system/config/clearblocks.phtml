@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © 2016 MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php /* @var $block \MageWorx\AlsoBought\Block\System\Config\Clearblock */ ?>
+
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+
+        jQuery('#clear_blocks').click(function () {
+            var params = {};
+            jQuery.ajax({
+                showLoader: true,
+                url: '<?php echo $block->getAjaxUrl() ?>',
+                data: {},
+                type: "GET",
+                dataType: 'json'
+
+            }).done(function (response) {
+
+                console.log(response);
+                var elem = jQuery('#messages');
+
+                if(elem.length > 0){
+                    elem.remove();
+                }
+
+                var html = '<div id="messages"><div class="messages"><div class="message message-success success"><div data-ui-id="messages-message-success">The blocks were cleared successfully.</div></div></div></div>';
+                jQuery('.page-main-actions').after('').after(html);
+                jQuery(document).scrollTop(0);
+
+
+            }).error(function (err) {
+                console.log('Error cleaning the blocks!' ,  err);
+            });
+        });
+
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>

@@ -1,0 +1,27 @@
+<div class="MagicToolboxContainer selectorsLeft minWidth"<?php echo $thumbSwitcherOptions ?>>
+<?php
+if (count($selectorsArray)) {
+?>
+    <div class="MagicToolboxSelectorsContainer<?php if (count($selectorsArray) == 1) echo ' hidden-container' ?>" style="flex-basis: <?php echo $selectorMaxWidth ?>px; width: <?php echo $selectorMaxWidth ?>px;">
+        <div id="MagicToolboxSelectors<?php echo $id ?>" class="<?php echo $additionalClasses ?>"<?php echo $scrollOptions ?>>
+        <?php echo join("\n\t\t", $selectorsArray); ?>
+        </div>
+    </div>
+<?php
+}
+?>
+    <div class="MagicToolboxMainContainer">
+        <?php echo $mainHTML; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        $scroll = document.getElementById('MagicToolboxSelectors<?php echo $id ?>');
+        if ($scroll && typeof $scroll != 'undefined') {
+            $attr = $scroll.getAttribute('data-options');
+            if ($attr !== null) {
+                $scroll.setAttribute('data-options', $attr.replace(/orientation *\: *[a-zA-Z]{1,}/gm, 'orientation:horizontal'));
+            }
+        }
+    }
+</script>

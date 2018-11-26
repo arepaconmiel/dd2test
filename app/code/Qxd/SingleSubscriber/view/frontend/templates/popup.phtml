@@ -1,0 +1,193 @@
+<div id="main-pop-up-container" style="display:none;">
+    <div id="newsletter-popup" class="container">
+        <div class="sub-container">
+            <div class="content">
+                <div class="pop-upLeft"><img class="pop-up-Image"
+                							src="<?php echo $this->getViewFileUrl('Qxd_SingleSubscriber::images/pop-up-image.png'); ?>"/>
+
+                </div>
+                <div class="pop-upRight">
+                    <div class="register-text">
+                        <p>FIRST IS BEST!</p>
+                        <span>Find out about new products <br/> and exclusive offers!</span>
+                    </div>
+                    <div class="register-form">
+                        <form id="newsletter-registration-form"
+                              action="<?php echo $block->getUrl('newsletter/subscriber/new/', array('_secure' => true)); ?>"
+                              method="post"
+      						  data-mage-init='{"validation":{}}'>
+                            <div class="form-fields-middle">
+                                <div class="form-wrapper">
+                                    <input name="email" id="cm_email-1" class="cm_email validate-email required-entry field-left"
+                                           type="text" aria-label="Add your email to subscribe" placeholder="Email Address"/>
+                                    <input id="mc-group" type="hidden" value="1294a1376b" name="group">
+                                    <input type="submit" value="" class="button pop-up-submit"/>
+                                </div>
+                                <div class="form-note"><span>We won't share your info with anyone.</span></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <img class="pop-up-CornerImage"
+            	src="<?php echo $this->getViewFileUrl('Qxd_SingleSubscriber::images/pop-up-corner.png'); ?>"/>
+        </div>
+    </div>
+</div>
+<div id="pop-up-overlay" style="display: none"></div>
+<?php /*if($_memcached && $_memcached->get('_stalker')){ echo $_memcached->get('_stalker'); } */?>
+
+<script>
+require(['jquery','box'], function(jQuery){
+
+	// <![CDATA[
+
+    jQuery( document ).ready(function() {
+
+    	jQuery("#pop-up-overlay").css('display', 'none');
+
+    	 jQuery("#pop-up-overlay").click(function () {
+            jQuery("#pop-up-overlay").css('display', 'none');
+        });
+        jQuery("div.fancybox-overlay").on("click", function () {
+            jQuery("#pop-up-overlay").css('display', 'none');
+        });
+
+        function hideOrdisplayStalker(stalker) {
+	        if (jQuery(stalker).attr("class") == 'goToDisplay') {
+	            jQuery(stalker).attr("class", "goToHide");
+	            jQuery("#stalkerBox").animate({bottom: '0px'});
+	        } else {
+	            jQuery(stalker).attr("class", "goToDisplay");
+	            jQuery("#stalkerBox").animate({bottom: '-120px'});
+	        }
+	    }
+
+	    jQuery(document).on("click", function (event) {
+	        if (jQuery("#stalkerButtonSpan").attr("class") == 'goToHide') {
+	            var hideDisplayButton = jQuery(".stalkerButtonDiv");
+	            if (hideDisplayButton !== event.target && !hideDisplayButton.has(event.target).length) {
+	                var trigger = jQuery("#newsletter-stalker");
+	                if (trigger !== event.target && !trigger.has(event.target).length) {
+	                    hideOrdisplayStalker(jQuery("#stalkerButtonSpan"));
+	                }
+	            }
+	        }
+	    });
+
+
+
+
+
+
+
+
+            ////////////////////////////////////MOVE THIS TO TOP MENU///////////////////////////////////////////
+    function beginNewsletterForm() {
+        jQuery.fancybox({
+            'width': '600',
+            'height': '300',
+            'padding': '0px',
+            'scrolling': 'no',
+            'autoDimensions': false,
+            'autoScale': false,
+            'autoSize': false,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'showCloseButton': true,
+            'type': 'inline',
+            'href': '#newsletter-popup'
+        });
+        jQuery("#newsletter-popup").trigger('click');
+        //jQuery("#pop-up-overlay").css('display','block');
+    }
+
+
+    jQuery.ajax({
+        method: "GET",
+        url: "<?php  echo $block->getUrl('singlesubscriber/index/ajax'); ?>",
+        dataType: "json"
+    })
+    .done(function( cookie ) {
+        
+        /*try {
+            var ajaxResponse=transport.responseText;
+            var ajaxResponeParsed=JSON.parse(ajaxResponse);
+        }
+        catch(err){ console.log(err.message); }*/
+
+        //if(ajaxResponeParsed) {
+            //POP-UP
+            try {
+                //var check_cookie = ajaxResponeParsed.singleSubscriber;
+                if (!cookie){
+                    if(jQuery(window).width() >= 991) {
+                        beginNewsletterForm();
+                    }
+                    else{
+                        jQuery("#pop-up-overlay").css('display','block');
+                        jQuery(".js_show_mobile_pop").show();
+                        jQuery(".js_show_mobile_pop .pop-upLeft").css('cssText','display:none !important;');
+                    }
+                }
+            }
+            catch(err){ console.log(err.message); }
+        //}
+    });
+    ////////////////////////////////////MOVE THIS TO TOP MENU///////////////////////////////////////////
+
+
+
+
+
+
+
+
+	});
+        
+
+        /*(function($) {
+            var test = 'test';
+            try {
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+            } catch(e) {
+                $(".notice.global.site.local_storage").show();
+            }
+        })(jQuery);*/
+        
+  
+
+
+
+    /*new Ajax.Request("/scuba-diving/ajaxmenu/ajax/getAllBlocks", {
+        method: 'Get',
+        onComplete: function (transport) {
+            try {
+                var ajaxResponse=transport.responseText;
+                var ajaxResponeParsed=JSON.parse(ajaxResponse);
+            }catch(err){ console.log(err.message); }
+
+            if(ajaxResponeParsed) {
+                //POP-UP
+                try {
+                    var check_cookie = ajaxResponeParsed.singleSubscriber;
+                    if (!check_cookie){
+                        if(jQuery(window).width() >= 991) {
+                            beginNewsletterForm();
+                        }
+                        else{
+                            jQuery("#pop-up-overlay").css('display','block');
+                            jQuery(".js_show_mobile_pop").show();
+                            jQuery(".js_show_mobile_pop .pop-upLeft").css('cssText','display:none !important;');
+                        }
+                    }
+                }
+                catch(err){ console.log(err.message); }
+            }
+        }
+    });*/
+
+    // ]]>
+});
+</script>
