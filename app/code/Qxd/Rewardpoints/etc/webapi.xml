@@ -3,7 +3,7 @@
     <route url="/V1/qxd/webservice/updateRewardPoints" method="POST">
         <service class="Qxd\Rewardpoints\Api\WebServiceRepositoryInterface" method="updateRewardPoints"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Qxd_Rewardpoints::webapi"/>
         </resources>
     </route>
 </routes>
