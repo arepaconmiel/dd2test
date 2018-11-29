@@ -1,33 +1,30 @@
 <?php
-     
-namespace Qxd\Rewardpoints\Plugin;
- 
-class Autosaverewardpoints
-{   
+
+namespace Qxd\Rewardpoints\Observer;
+
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+
+
+class AutoSaveRewardPoints implements ObserverInterface
+{
 
     public function __construct(
-        \Magento\Framework\App\Request\Http $request,
-        \Magento\Catalog\Model\Product $product,
         \Qxd\Rewardpoints\Helper\Data $helper
     ) {
-        $this->_request = $request;
-        $this->_product = $product;
         $this->_helper = $helper;
     }
 
     /*
-    * This plugin assign the reward points to a product based on its price 
-    * when is saved or updated in the admin panel 
+    * This observer is used to save the cateogry images in s3 when a category is saved 
+    * or updated in the admin panel.
     */
 
-    public function afterExecute(
-        \Magento\Catalog\Controller\Adminhtml\Product\Save $subject, 
-        $result
-    ) 
+    public function execute(Observer $observer)
     {   
 
-        $productId = $this->_request->getParam('id');
-        $product = $this->_product->load($productId);
+        $product = $observer->getProduct();
+        $productId = $product->getId();
 
         $type = $product->getTypeId();
         $price = $this->_helper->returnRewardPointsForProducts($product);
@@ -43,10 +40,9 @@ class Autosaverewardpoints
                 $bundle_price = $this->_helper->getPriceBundle($product);
                 $product->setRewardPoints($bundle_price);
             }
-        } 
+        }
 
         $product->save();
-
-        return $result;
     }
 }
+

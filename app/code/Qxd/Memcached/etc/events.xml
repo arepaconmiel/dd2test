@@ -5,5 +5,9 @@
    		<observer name="qxd_memcached_catalog_category_save_after" instance="Qxd\Memcached\Observer\Categorysave" />
    </event>
 
+   <event name="controller_action_catalog_product_save_entity_after">
+       <observer name="qxd_memcached_product" instance="Qxd\Memcached\Observer\Productsave" />
+   </event>
+
 </config>
 

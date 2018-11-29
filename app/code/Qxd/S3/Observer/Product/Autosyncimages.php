@@ -1,15 +1,19 @@
 <?php
-     
-namespace Qxd\S3\Plugin;
 
+namespace Qxd\S3\Observer\Product;
+
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Framework\App\Filesystem\DirectoryList;
- 
-class Afterproduct
-{   
+
+
+class Autosyncimages implements ObserverInterface
+{
 
     public function __construct(
-        \Magento\Framework\App\Request\Http $request,
-        \Magento\Catalog\Model\Product $product,
         \MagicToolbox\MagicZoomPlus\Helper\Data $magicToolboxHelper,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
@@ -18,8 +22,6 @@ class Afterproduct
         \Qxd\Memcached\Helper\Data $memcached,
         \Magento\Catalog\Helper\Image $imageHelper
     ) {
-        $this->_request = $request;
-        $this->_product = $product;
         $this->magicToolboxHelper = $magicToolboxHelper;
         $this->toolObj = $magicToolboxHelper->getToolObj();
         $this->_storeManager=$storeManager;
@@ -31,22 +33,17 @@ class Afterproduct
     }
 
     /*
-    * Plugin to upload new images to s3 for the product
-    * Based on the MagicToolbox module
+    * Observer to upload new images to s3 for the category
     */
 
-    public function afterExecute(
-        \Magento\Catalog\Controller\Adminhtml\Product\Save $subject, 
-        $result
-    ) 
+    public function execute(Observer $observer)
     {   
-        /*$writer = new \Zend\Log\Writer\Stream(BP . '/var/log/s3_product_plugin.log');
+        /*$writer = new \Zend\Log\Writer\Stream(BP . '/var/log/tests3product.log');
         $logger = new \Zend\Log\Logger();
-        $logger->addWriter($writer);
-        $logger->info('Enter');*/
-       
-        $productId = $this->_request->getParam('id');
-        $product = $this->_product->load($productId);
+        $logger->addWriter($writer);*/ 
+        $product = $observer->getProduct();
+        $productId = $product->getId();
+        
         $imagesToParse=array();
         $client = $this->_helper->awsConnection();
         $mediaPATH = $this->_filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath();
@@ -56,71 +53,86 @@ class Afterproduct
 
         $baseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
 
-        foreach ($product->getMediaGalleryImages() as $image)
-        {   
-            $mediaType = $image->getMediaType();
-            if ($mediaType != 'image' && $mediaType != 'external-video') {
-                 continue;
-            }
+        $product_media = $product->getMediaGalleryImages();
+        if(is_array($product_media)){
+            foreach ($product_media  as $image)
+            {   
 
-            $img = $this->_imageHelper->init($product, 'product_page_image_large', ['width' => null, 'height' => null])
-                            ->setImageFile($image->getFile())
-                            ->getUrl();
-            $iPath = $image->getPath();
-
-            if (!is_file($iPath)) {
-                if (strpos($img, $baseMediaUrl) === 0) {
-                    $iPath = str_replace($baseMediaUrl, '', $img);
-                    $iPath = $this->magicToolboxHelper->getMediaDirectory()->getAbsolutePath($iPath);
-                } else {
-                    $iPath = str_replace($baseStaticUrl, '', $img);
-                    $iPath = $this->magicToolboxHelper->getStaticDirectory()->getAbsolutePath($iPath);
+                $mediaType = $image->getMediaType();
+                if ($mediaType != 'image' && $mediaType != 'external-video') {
+                     continue;
                 }
-            }
-            $imagesToParse[]= $image->getPath();
 
-            try {
-                $originalSizeArray = getimagesize($iPath);
-            } catch (\Exception $exception) {
-                $originalSizeArray = [0, 0];
-            }
+                $img = $this->_imageHelper->init($product, 'product_page_image_large', ['width' => null, 'height' => null])
+                                ->setImageFile($image->getFile())
+                                ->getUrl();
+                $iPath = $image->getPath();
 
-            if ($mediaType == 'image') {
-                if ($this->toolObj->params->checkValue('square-images', 'Yes')) {
-                    $bigImageSize = ($originalSizeArray[0] > $originalSizeArray[1]) ? $originalSizeArray[0] : $originalSizeArray[1];
-                    $img = $this->_imageHelper->init($product, 'product_page_image_large')
+                if (!is_file($iPath)) {
+                    if (strpos($img, $baseMediaUrl) === 0) {
+                        $iPath = str_replace($baseMediaUrl, '', $img);
+                        $iPath = $this->magicToolboxHelper->getMediaDirectory()->getAbsolutePath($iPath);
+                    } else {
+                        $iPath = str_replace($baseStaticUrl, '', $img);
+                        $iPath = $this->magicToolboxHelper->getStaticDirectory()->getAbsolutePath($iPath);
+                    }
+                }
+                if(file_exists($image->getPath())){
+                    $imagesToParse[]= $image->getPath();
+                }
+
+                try {
+                    $originalSizeArray = getimagesize($iPath);
+                } catch (\Exception $exception) {
+                    $originalSizeArray = [0, 0];
+                }
+
+                if ($mediaType == 'image') {
+                    if ($this->toolObj->params->checkValue('square-images', 'Yes')) {
+                        $bigImageSize = ($originalSizeArray[0] > $originalSizeArray[1]) ? $originalSizeArray[0] : $originalSizeArray[1];
+                        $img = $this->_imageHelper->init($product, 'product_page_image_large')
+                                        ->setImageFile($image->getFile())
+                                        ->resize($bigImageSize)
+                                        ->getUrl();
+                    }
+
+                    $first_img = str_replace($baseUrl. 'pub/media/', $mediaPATH, $img);
+                    if(file_exists($first_img)){
+                        $imagesToParse[]= $first_img;
+                    }
+                    list($w, $h) = $this->magicToolboxHelper->magicToolboxGetSizes('thumb', $originalSizeArray);
+                    $medium = $this->_imageHelper->init($product, 'product_page_image_medium', ['width' => $w, 'height' => $h])
                                     ->setImageFile($image->getFile())
-                                    ->resize($bigImageSize)
                                     ->getUrl();
+
+                    $second_img = str_replace($baseUrl. 'pub/media/', $mediaPATH, $medium);
+                    if(file_exists($first_img)){
+                        $imagesToParse[]= $second_img;
+                    }
                 }
 
-                $imagesToParse[]= str_replace($baseUrl. 'pub/media/', $mediaPATH, $img);
-                list($w, $h) = $this->magicToolboxHelper->magicToolboxGetSizes('thumb', $originalSizeArray);
-                $medium = $this->_imageHelper->init($product, 'product_page_image_medium', ['width' => $w, 'height' => $h])
+                list($w, $h) = $this->magicToolboxHelper->magicToolboxGetSizes('selector', $originalSizeArray);
+                $thumb = $this->_imageHelper->init($product, 'product_page_image_small', ['width' => $w, 'height' => $h])
                                 ->setImageFile($image->getFile())
                                 ->getUrl();
 
-                $imagesToParse[]= str_replace($baseUrl. 'pub/media/', $mediaPATH, $medium);
+                $third_img = str_replace($baseUrl. 'pub/media/', $mediaPATH, $thumb);
+                if(file_exists($first_img)){
+                    $imagesToParse[]= $third_img;
+                }
+                
             }
-
-            list($w, $h) = $this->magicToolboxHelper->magicToolboxGetSizes('selector', $originalSizeArray);
-            $thumb = $this->_imageHelper->init($product, 'product_page_image_small', ['width' => $w, 'height' => $h])
-                            ->setImageFile($image->getFile())
-                            ->getUrl();
-
-            $imagesToParse[]= str_replace($baseUrl. 'pub/media/', $mediaPATH, $thumb);
-            
         }
 
         try{
 
             $small_image = $product->getData('small_image');
-            if( $small_image != 'no_selection' || $small_image != '' || $small_image != null){
+            if( $small_image != 'no_selection' && $small_image != '' && $small_image != null){
 
                 $small_image_path = $mediaPATH . 'catalog/product' . $small_image;
                 
-                if(file_exists($small_image_path)){
 
+                if(file_exists($small_image_path)){
                     $resizedSmallImage = $this->_imageHelper->init($product, 'small_image')
                                         ->setImageFile($small_image)
                                         ->resize(250);
@@ -136,7 +148,7 @@ class Afterproduct
             }   
 
             $thumbnail_image = $product->getThumbnail();
-            if( $thumbnail_image != 'no_selection' || $thumbnail_image != '' || $thumbnail_image != null){
+            if( $thumbnail_image != 'no_selection' && $thumbnail_image != '' && $thumbnail_image != null){
 
                 $thumbnail_image_path = $mediaPATH . 'catalog/product' . $thumbnail_image;
                 
@@ -158,14 +170,13 @@ class Afterproduct
         }
 
 
+        //$logger->info(print_r($imagesToParse, true));
         if(!empty($imagesToParse)){ 
             $this->sendFiles($client, $imagesToParse); 
         }
 
         $_memcached = $this->_memcached->initMemcached();
         if($_memcached){ $_memcached->delete($product->getId().'_media'); }
-
-        return $result;
     }
 
     public function sendFiles($client,$imagesToParse)
@@ -180,3 +191,4 @@ class Afterproduct
         }
     }
 }
+

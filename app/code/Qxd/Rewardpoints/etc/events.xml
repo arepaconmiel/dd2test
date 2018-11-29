@@ -5,4 +5,8 @@
        <observer name="qxd_rewards_calculatepoints" instance="Qxd\Rewardpoints\Observer\Calculatepoints" />
    </event>
 
+   <event name="controller_action_catalog_product_save_entity_after">
+       <observer name="qxd_rewards_product" instance="Qxd\Rewardpoints\Observer\AutoSaveRewardPoints" />
+   </event>
+
 </config>

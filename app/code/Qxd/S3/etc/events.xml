@@ -5,4 +5,8 @@
        <observer name="qxd_s3_autosyncimages" instance="Qxd\S3\Observer\Category\Autosyncimages" />
    </event>
 
+   <event name="controller_action_catalog_product_save_entity_after">
+       <observer name="qxd_s3_product" instance="Qxd\S3\Observer\Product\Autosyncimages" />
+   </event>
+
 </config>
