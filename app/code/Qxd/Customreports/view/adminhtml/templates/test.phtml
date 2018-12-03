@@ -1,0 +1,81 @@
+<?php
+$datesArray=$block->getDatesArray();
+$totals=$block->returnTotals();
+?>
+
+<div class="entry-edit-head">
+   <h4 class="icon-head head-edit-form fieldset-legend">YOY Sales Results For Date: <?php echo date("m/d/Y",strtotime($datesArray['so_far_today']));?></h4>
+</div>
+<div class="admin__data-grid-wrap admin__data-grid-wrap-static">
+   <table class="data-grid" >
+      <thead>
+         <tr>
+            <th class="data-grid-th no-link" style="width: 20%">PERIOD</th>
+            <th class="data-grid-th no-link">ORDERS</th>
+            <th class="data-grid-th no-link">REVENUE</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr class="data-row">
+            <td class="label"><label for="selected" style="width: 220px; font-weight: bold;">So Far Today (<?php echo date("m/d/Y",strtotime($datesArray['so_far_today'])); ?>)</label></td>
+            <td class="value"><?php echo $totals['so_far_today']['qty']; ?></td>
+            <td class="value"><?php echo '$'.number_format($totals['so_far_today']['revenue'], 2, '.', ','); ?></td>
+         </tr>
+         <tr class="data-row _odd-row">
+            <td class="label"><label for="ly" style="width: 220px; font-weight: bold;">So Far Today (<?php echo date("m/d/Y",strtotime($datesArray['so_far_today_last_year'])); ?>) Last Year</label></td>
+            <td class="value"><?php echo $totals['so_far_today_last_year']['qty']; ?></td>
+            <td class="value"><?php echo '$'.number_format($totals['so_far_today_last_year']['revenue'], 2, '.', ','); ?></td>
+         </tr>
+         <tr class="data-row">
+            <td class="label"><label for="ou" style="width: 220px; font-weight: bold;">Over/Under Today</label></td>
+            <td class="value"><?php echo $totals['so_far_today']['over']."%"; ?></td>
+            <td class="value"><?php echo $totals['so_far_today']['under']."%"; ?></td>
+         </tr>
+         <tr class="data-row _odd-row">
+            <td class="label"><label for="wdly" style="width: 220px; font-weight: bold;">This Whole Day (<?php echo date("m/d/Y",strtotime($datesArray['whole_day_last_year'])); ?>) Last Year</label></td>
+            <td class="value"><?php echo $totals['whole_day_last_year']['qty']; ?></td>
+            <td class="value"><?php echo '$'.number_format($totals['whole_day_last_year']['revenue'], 2, '.', ','); ?></td>
+         </tr>
+         <tr class="data-row">
+            <td class="label" style="height: 18px"></td>
+            <td class="value" style="height: 18px"></td>
+            <td class="value" style="height: 18px"></td>
+         </tr>
+         <tr class="data-row _odd-row">
+            <td class="label"><label for="db" style="width: 220px; font-weight: bold;">Yesterday (<?php echo date("m/d/Y",strtotime($datesArray['yesterday'])); ?>)</label></td>
+            <td class="value"><?php echo $totals['yesterday']['qty']; ?></td>
+            <td class="value"><?php echo '$'.number_format($totals['yesterday']['revenue'], 2, '.', ','); ?></td>
+         </tr>
+         <tr class="data-row">
+            <td class="label"><label for="dbly"  style="width: 220px; font-weight: bold;">Yesterday Last Year (<?php echo date("m/d/Y",strtotime($datesArray['yesterday_last_year'])); ?>) </label></td>
+            <td class="value"><?php echo $totals['yesterday_last_year']['qty']; ?></td>
+            <td class="value"><?php echo '$'.number_format($totals['yesterday_last_year']['revenue'], 2, '.', ','); ?></td>
+         </tr>
+         <tr class="data-row _odd-row">
+            <td class="label"><label for="ou" style="width: 220px; font-weight: bold;">Over/Under Yesterday</label></td>
+            <td class="value"><?php echo $totals['yesterday']['over']."%"; ?></td>
+            <td class="value"><?php echo $totals['yesterday']['under']."%"; ?></td>
+         </tr>
+         <tr class="data-row">
+            <td class="label" style="height: 18px"></td>
+            <td class="value" style="height: 18px"></td>
+            <td class="value" style="height: 18px"></td>
+         </tr>
+         <tr class="data-row _odd-row">
+            <td class="label"><label for="wf"  style="width: 220px; font-weight: bold;">Last 4 Weeks (<?php echo date("m/d/Y",strtotime($datesArray['last_week'])).' - '.date("m/d/Y",strtotime($datesArray['so_far_today'])); ?>)</label></td>
+            <td class="value"><?php echo $totals['last_week']['qty']; ?></td>
+            <td class="value"><?php echo '$'.number_format($totals['last_week']['revenue'], 2, '.', ','); ?></td>
+         </tr>
+         <tr class="data-row">
+            <td class="label"><label for="wfly" style="width: 220px; font-weight: bold;">Last 4 Weeks Last Year (<?php echo date("m/d/Y",strtotime($datesArray['last_week_last_year'])).' - '.date("m/d/Y",strtotime($datesArray['so_far_today_last_year'])); ?>) </label></td>
+            <td class="value"><?php echo $totals['last_week_last_year']['qty']; ?></td>
+            <td class="value"><?php echo '$'.number_format($totals['last_week_last_year']['revenue'], 2, '.', ','); ?></td>
+         </tr>
+         <tr class="data-row _odd-row">
+            <td class="label"><label for="ou" style="width: 220px; font-weight: bold;">Over/Under Last 4 Weeks</label></td>
+            <td class="value"><?php echo $totals['last_week']['over']."%"; ?></td>
+            <td class="value"><?php echo $totals['last_week']['under']."%"; ?></td>
+         </tr>
+      </tbody>
+   </table>
+</div>
