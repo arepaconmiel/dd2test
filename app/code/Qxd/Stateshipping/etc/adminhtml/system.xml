@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+        <system>
+            <section id="stateshipping_options" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Header X-Day Free Shipping</label>
+                <tab>qxd</tab>
+                <resource>Qxd_Stateshipping::config</resource>
+                <group id="configure_states" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>States</label>
+                    
+                    <field id="stateshipping_alabama" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Alabama</label>
+                    </field>
+
+                    <field id="stateshipping_alaska" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Alaska</label>
+                    </field>
+
+                    <field id="stateshipping_american_samoa" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>American Samoa</label>
+                    </field>
+
+                    <field id="stateshipping_arizona" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Arizona</label>
+                    </field>
+
+                    <field id="stateshipping_arkansas" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Arkansas</label>
+                    </field>
+
+                    <field id="stateshipping_armed_forces_africa" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Armed Forces Africa</label>
+                    </field>
+
+                    <field id="stateshipping_armed_forces_americas" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Armed Forces Americas</label>
+                    </field>
+
+                    <field id="stateshipping_armed_forces_canada" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Armed Forces Canada</label>
+                    </field>
+
+                    <field id="stateshipping_armed_forces_europe" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Armed Forces Europe</label>
+                    </field>
+
+                    <field id="stateshipping_armed_forces_middle_east" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Armed Forces Middle East</label>
+                    </field>
+
+                    <field id="stateshipping_armed_forces_pacific" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Armed Forces Pacific</label>
+                    </field>
+
+                    <field id="stateshipping_california" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>California</label>
+                    </field>
+
+                    <field id="stateshipping_colorado" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Colorado</label>
+                    </field>
+
+                    <field id="stateshipping_connecticut" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Connecticut</label>
+                    </field>
+
+                    <field id="stateshipping_delaware" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Delaware</label>
+                    </field>
+
+                    <field id="stateshipping_district_of_columbia" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>District of Columbia</label>
+                    </field>
+
+                    <field id="stateshipping_federated_states_of_micronesia" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Federated States Of Micronesia</label>
+                    </field>
+
+                    <field id="stateshipping_florida" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Florida</label>
+                    </field>
+
+                    <field id="stateshipping_georgia" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Georgia</label>
+                    </field>
+
+                    <field id="stateshipping_guam" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Guam</label>
+                    </field>
+
+                    <field id="stateshipping_hawaii" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Hawaii</label>
+                    </field>
+
+                    <field id="stateshipping_idaho" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Idaho</label>
+                    </field>
+
+                    <field id="stateshipping_illinois" translate="label" type="text" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Illinois</label>
+                    </field>
+
+                    <field id="stateshipping_indiana" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Indiana</label>
+                    </field>
+
+                    <field id="stateshipping_iowa" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Iowa</label>
+                    </field>
+
+                    <field id="stateshipping_kansas" translate="label" type="text" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Kansas</label>
+                    </field>
+
+                    <field id="stateshipping_kentucky" translate="label" type="text" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Kentucky</label>
+                    </field>
+
+                    <field id="stateshipping_louisiana" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Louisiana</label>
+                    </field>
+
+                    <field id="stateshipping_maine" translate="label" type="text" sortOrder="29" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maine</label>
+                    </field>
+
+                    <field id="stateshipping_marshall_islands" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Marshall Islands</label>
+                    </field>
+
+                    <field id="stateshipping_maryland" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maryland</label>
+                    </field>
+
+                    <field id="stateshipping_massachusetts" translate="label" type="text" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Massachusetts</label>
+                    </field>
+
+                    <field id="stateshipping_michigan" translate="label" type="text" sortOrder="33" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Michigan</label>
+                    </field>
+
+                    <field id="stateshipping_minnesota" translate="label" type="text" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minnesota</label>
+                    </field>
+
+                    <field id="stateshipping_mississippi" translate="label" type="text" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Mississippi</label>
+                    </field>
+
+                    <field id="stateshipping_missouri" translate="label" type="text" sortOrder="36" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Missouri</label>
+                    </field>
+
+                    <field id="stateshipping_montana" translate="label" type="text" sortOrder="37" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Montana</label>
+                    </field>
+
+                    <field id="stateshipping_nebraska" translate="label" type="text" sortOrder="38" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Nebraska</label>
+                    </field>
+
+                    <field id="stateshipping_nevada" translate="label" type="text" sortOrder="39" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Nevada</label>
+                    </field>
+
+                    <field id="stateshipping_new_hampshire" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Hampshire</label>
+                    </field>
+
+                    <field id="stateshipping_new_jersey" translate="label" type="text" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Jersey</label>
+                    </field>
+
+                    <field id="stateshipping_new_mexico" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New Mexico</label>
+                    </field>
+
+                    <field id="stateshipping_new_york" translate="label" type="text" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>New York</label>
+                    </field>
+
+                    <field id="stateshipping_north_carolina" translate="label" type="text" sortOrder="44" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>North Carolina</label>
+                    </field>
+
+                    <field id="stateshipping_north_dakota" translate="label" type="text" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>North Dakota</label>
+                    </field>
+
+                    <field id="stateshipping_northern_mariana_islands" translate="label" type="text" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Northern Mariana Islands</label>
+                    </field>
+
+                    <field id="stateshipping_ohio" translate="label" type="text" sortOrder="47" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Ohio</label>
+                    </field>
+
+                    <field id="stateshipping_oklahoma" translate="label" type="text" sortOrder="48" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Oklahoma</label>
+                    </field>
+
+                    <field id="stateshipping_oregon" translate="label" type="text" sortOrder="49" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Oregon</label>
+                    </field>
+
+                    <field id="stateshipping_palau" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Palau</label>
+                    </field>
+
+                    <field id="stateshipping_pennsylvania" translate="label" type="text" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Pennsylvania</label>
+                    </field>
+
+                    <field id="stateshipping_puerto_rico" translate="label" type="text" sortOrder="52" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Puerto Rico</label>
+                    </field>
+
+                    <field id="stateshipping_rhode_island" translate="label" type="text" sortOrder="53" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Rhode Island</label>
+                    </field>
+
+                    <field id="stateshipping_south_carolina" translate="label" type="text" sortOrder="54" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>South Carolina</label>
+                    </field>
+
+                    <field id="stateshipping_south_dakota" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>South Dakota</label>
+                    </field>
+
+                    <field id="stateshipping_tennessee" translate="label" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tennessee</label>
+                    </field>
+
+                    <field id="stateshipping_texas" translate="label" type="text" sortOrder="57" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Texas</label>
+                    </field>
+
+                    <field id="stateshipping_utah" translate="label" type="text" sortOrder="58" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Utah</label>
+                    </field>
+
+                    <field id="stateshipping_vermont" translate="label" type="text" sortOrder="59" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Vermont</label>
+                    </field>
+
+                    <field id="stateshipping_virgin_islands" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Virgin Islands</label>
+                    </field>
+
+                    <field id="stateshipping_virginia" translate="label" type="text" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Virginia</label>
+                    </field>
+
+                    <field id="stateshipping_washington" translate="label" type="text" sortOrder="62" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Washington</label>
+                    </field>
+
+                    <field id="stateshipping_west_virginia" translate="label" type="text" sortOrder="63" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>West Virginia</label>
+                    </field>
+
+                    <field id="stateshipping_wisconsin" translate="label" type="text" sortOrder="64" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Wisconsin</label>
+                    </field>
+
+                    <field id="stateshipping_wyoming" translate="label" type="text" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Wyoming</label>
+                    </field>
+
+                    <field id="stateshipping_out" translate="label" type="text" sortOrder="66" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>OUT OF THE USA</label>
+                    </field>
+                </group>
+                <group id="import_states" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Import Days</label>
+                    
+                    <field id="import_days" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Import Days</label>
+                        <backend_model>Qxd\Stateshipping\Model\Uploadstate</backend_model>
+                        <upload_dir>var/QXD_import</upload_dir>
+                    </field>
+
+                </group>
+                <group id="export_states" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Download current file</label>
+                    
+                    <field id="export_days" translate="label" type="file" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Current File</label>
+                        <frontend_model>Qxd\Stateshipping\Block\System\Config\Form\Downloadbutton</frontend_model>
+                    </field>
+                </group>
+            </section>
+        </system>
+    </config>
+

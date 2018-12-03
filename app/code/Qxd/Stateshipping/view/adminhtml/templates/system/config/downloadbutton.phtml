@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © 2016 MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php /* @var $block \Qxd\S3\Block\System\Config\Clearblock */ ?>
+
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+
+        jQuery('#downloadSDCSV_button').click(function () {
+            var hideName="groups[import_states][fields][import_days][value][value]";
+            var fileUploaded=document.getElementsByName(hideName)[0];
+ 
+            if(fileUploaded != undefined)
+            {
+                var url="<?php echo $block->getAjaxUrl()."filename/"?>";
+                if(fileUploaded.value != "" && fileUploaded.value != undefined){ window.location=url+fileUploaded.value; }
+                else{ alert("There is not a file uploaded yet"); }
+            }else{ alert("There is not a file uploaded yet"); }
+        });
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>

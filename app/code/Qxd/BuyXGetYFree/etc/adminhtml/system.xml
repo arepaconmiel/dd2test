@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+        <system>
+            <section id="buyxgetyfree_section4" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Coupon X Get Y Free</label>
+                <tab>qxd</tab>
+                <resource>Qxd_Memcached::config</resource>
+                <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Define Coupon X Get Y Free/Discounted Products and Criteria</label>
+                    
+                    <field id="label1" translate="label" type="note" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <comment>This extension can create a sales promotion, where a bonus product Y is added to the cart if the customer applies a promotional coupon code. Please ensure your product Y is a simple product.</comment>
+                    </field>
+
+                    <field id="coupon_producty_product_id" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Product Y Product ID:</label>
+                        <comment>ID number of product Y (bonus product) Product Y must be a simple product and the ID configured here must be unique.</comment>
+                    </field>
+
+                    <field id="coupon_required" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Coupon required to qualify for Product Y:</label>
+                        <comment>Name of the coupon required required to qualify for product Y. Coupon must be valid and configured in Magento under Promotions.</comment>
+                    </field>
+
+                    <field id="coupon_configurable_skus" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Skus of children products</label>
+                        <comment>Simple Products asscoiated to configurable products. Used with the Rule "Buy X and Y get Z free (Z is a configurable product)". Separated by ,</comment>
+                    </field>
+                </group>
+            </section>
+        </system>
+    </config>
+
