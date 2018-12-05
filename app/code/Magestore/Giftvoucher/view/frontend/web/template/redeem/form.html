@@ -1,0 +1,80 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<dl id="giftvoucher_container" class="gift-card" data-bind="visible:(!isBuyingGiftcard())">
+    <dt class="form-group giftvoucher">
+        <input type="checkbox" name="payment[giftvoucher]" id="giftvoucher" data-bind="checked:useGiftcard" />
+        <label for="giftvoucher" data-bind="i18n:'Use Gift Card to check out'"></label>
+    </dt>
+    <dd class="giftvoucher" data-bind="visible:useGiftcard">
+        <ul  id="payment_form_giftvoucher">
+            <li class="giftvoucher-discount-code form-group"  data-bind="visible:hasUsingCodes">
+                <ul data-bind="foreach:usingCodes">
+                    <li class="form-group">
+                        <div class="">
+                            <label for="giftvoucher" data-bind="text:code" style="font-weight: bold;">
+                            </label>
+                            <input onfocus="this.select()" class="form-control input-text" type="text"
+                                   data-bind="value:discount, attr:{title:$t('Gift Card Amount'), id:'giftvoucher-using-code-input-'+code}, event:{keypress:$parent.scanAfter}" />
+                            <a href="#" data-bind="i18n:'Remove', attr:{title:$t('Remove')}, click: $parent.removeUsingCode"></a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li id="giftvoucher-custom-code" class="form-group">
+                <div class="row"><div class="col-xs-6">
+                    <label for="giftvoucher_code" data-bind="text: $t('Enter your gift code')"></label>
+                    <input data-bind="attr:{title:$t('Gift Card Code')}, value: selectedNewCode, event:{keypress:scanAfter}"
+                           type="text"
+                           class="form-control input-text"
+                           id="giftvoucher_code"
+                           name="giftvoucher_code"
+                           onfocus="this.select()"/>
+                </div></div>
+            </li>
+            <li class="form-group" data-bind="visible:hasExistingCodes">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label for="giftvoucher_existed_code" data-bind="text: $t('or select an existing Gift Card code')"></label>
+                        <select data-bind="attr:{title:$t('Customer Gift Card Code')}, value:selectedExistingCode"
+                                class="form-control input-select"
+                                id="giftvoucher_existed_code"
+                                name="existed_giftvoucher_code">
+                            <option value="" data-bind="i18n:'-- Please Select --'"></option>
+                            <!--ko foreach: existingCodes-->
+                            <option data-bind="value:gift_code, text:$parent.getExistingCodeTitle($data)"></option>
+                            <!--/ko-->
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li style="color: #eb340a;padding-left: 5px;font-size: 11px;font-weight: bold;line-height: 13px; display:none" id="giftcard_notice_1" data-bind="text: $t('Please enter your code')"></li>
+            <li style="color: #eb340a;padding-left: 5px;font-size: 11px;font-weight: bold;line-height: 13px; display:none" id="giftcard_notice_2" data-bind="text: $t('Please enter or chose your code')"></li>
+            <li>
+                <!--ko if:isGuest-->
+                <!-- ko text: $t('To check your Gift card information, please click ')--><!-- /ko -->
+                <a target="_blank" data-bind="text: $t('here'), attr:{href:checkCodesUrl}"></a>
+                <!--/ko-->
+                <!--ko ifnot:isGuest-->
+                <!-- ko text: $t('To manage your Gift Card, please click ')--><!-- /ko -->
+                <a target="_blank" data-bind="text: $t('here'), attr:{href:manageCodesUrl}"></a>
+                <!--/ko-->
+            </li>
+            <li>
+                <div class="input-box">
+                    <button type="button" class="button" id="giftvoucher_add" data-bind="attr:{title:$t('Apply')}, click:submit">
+                        <span><span data-bind="text: $t('Add Gift Card')"></span></span>
+                    </button>
+                </div>
+            </li>
+            <!-- /ko -->
+            <p></p>
+        </ul>
+    </dd>
+</dl>
+<!--ko if:isBuyingGiftcard-->
+<h2 data-bind="i18n:'Gift Card'"></h2>
+<span style="font-weight: bold" data-bind="text: $t('Gift Cards cannot be used to purchase Gift Card products')"></span>
+<!-- /ko -->

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">giftcard_pattern_form.giftcard_pattern_form_data_source</item>
+            <item name="deps" xsi:type="string">giftcard_pattern_form.giftcard_pattern_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">giftcard_pattern_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\Form\Button\BackButton</item>
+            <item name="delete" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\Form\Button\DeleteButton</item>
+            <item name="reset" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\GiftCodePattern\Edit\Button\ResetButton</item>
+            <item name="save_and_continue" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\GiftCodePattern\Edit\Button\SaveAndContinueButton</item>
+            <item name="save_and_generate" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\GiftCodePattern\Edit\Button\SaveAndGenerateButton</item>
+            <item name="duplicate" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\GiftCodePattern\Edit\Button\Duplicate</item>
+            <item name="save" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\GiftCodePattern\Edit\Button\SaveButton</item>
+        </item>
+    </argument>
+    <dataSource name="giftcard_pattern_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magestore\Giftvoucher\Ui\DataProvider\GiftCodePattern\DataProvider</argument>
+            <argument name="name" xsi:type="string">giftcard_pattern_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">template_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="giftvoucheradmin/giftcodepattern/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="template_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="dataScope" xsi:type="string">template_id</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+        <field name="template_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Pattern name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="dataScope" xsi:type="string">template_name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${$.provider}:data.is_generated</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </field>
+        <field name="pattern">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Gift Code Pattern</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="dataScope" xsi:type="string">pattern</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[
+                    Examples:<br/><strong>[A.8] : 8 alpha<br/>[N.4] : 4 numeric<br/>[AN.6] : 6 alphanumeric<br/>GIFT-[A.4]-[AN.6] : GIFT-ADFA-12NF0O</strong>
+                    ]]></item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${$.provider}:data.is_generated</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+        </field>
+        <field name="balance">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Gift Code Value</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="dataScope" xsi:type="string">balance</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${$.provider}:data.is_generated</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">300</item>
+        		</item>
+        	</argument>
+        </field>
+        <field name="currency">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="formElement" xsi:type="string">select</item>
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">currency</item>
+                    <item name="label" xsi:type="string" translate="true">Currency</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${$.provider}:data.is_generated</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">400</item>
+        		</item>
+        		<item name="options" xsi:type="object">Magestore\Giftvoucher\Model\Source\Giftvoucher\CurrencyOptions</item>
+        	</argument>
+        </field>
+        <field name="expired_at">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="formElement" xsi:type="string">date</item>
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">expired_at</item>
+                    <item name="label" xsi:type="string" translate="true">Expired on</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${$.provider}:data.is_generated</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">500</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-date" xsi:type="boolean">true</item>
+                    </item>
+        		</item>
+        	</argument>
+        </field>
+        <field name="amount">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Gift Code Qty</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="dataScope" xsi:type="string">amount</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${$.provider}:data.is_generated</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">600</item>
+        		</item>
+        	</argument>
+        </field>
+        <field name="store_id">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">gift_code_pattern</item>
+                    <item name="formElement" xsi:type="string">select</item>
+        			<item name="dataType" xsi:type="string">number</item>
+                    <item name="dataScope" xsi:type="string">store_id</item>
+                    <item name="label" xsi:type="string" translate="true">Store view</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="disabled" xsi:type="string">${$.provider}:data.is_generated</item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">700</item>
+        		</item>
+        		<item name="options" xsi:type="object">Magestore\Giftvoucher\Model\Source\Giftvoucher\StoresOptions</item>
+        	</argument>
+        </field>
+    </fieldset>
+    <fieldset name="conditions">
+    	<argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Shopping Cart Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+	    <container name="conditions_apply_to">
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magestore\Giftvoucher\Block\Adminhtml\GiftCodePattern\Edit\Tab\Conditions</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

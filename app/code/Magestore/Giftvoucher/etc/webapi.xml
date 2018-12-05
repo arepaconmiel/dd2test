@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/giftcard/products/list" method="GET">
+        <service class="Magestore\Giftvoucher\Api\GiftvoucherProduct\GiftvoucherProductRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Giftvoucher::giftcard" />
+        </resources>
+    </route>
+
+    <route url="/V1/giftcard/list" method="GET">
+        <service class="Magestore\Giftvoucher\Api\GiftvoucherRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magestore_Giftvoucher::giftcard" />
+        </resources>
+    </route>
+
+    <route url="/V1/giftcard/check/:giftCode" method="GET">
+        <service class="Magestore\Giftvoucher\Api\GiftCode\GiftCodeManagementServiceInterface" method="check"/>
+        <resources>
+            <resource ref="Magestore_Giftvoucher::giftcard" />
+        </resources>
+    </route>
+
+    <route url="/V1/giftcard/create" method="POST">
+        <service class="Magestore\Giftvoucher\Api\GiftvoucherRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magestore_Giftvoucher::giftcard" />
+        </resources>
+    </route>
+
+    <route url="/V1/giftcard/history/:giftCode" method="GET">
+        <service class="Magestore\Giftvoucher\Api\GiftCode\GiftCodeManagementServiceInterface" method="checkHistory"/>
+        <resources>
+            <resource ref="Magestore_Giftvoucher::giftcard" />
+        </resources>
+    </route>
+
+
+    <route url="/V1/giftcard/massCreate" method="POST">
+        <service class="Magestore\Giftvoucher\Api\GiftvoucherRepositoryInterface" method="massCreate"/>
+        <resources>
+            <resource ref="Magestore_Giftvoucher::giftcard" />
+        </resources>
+    </route>
+
+
+    <route url="/V1/giftcard/sendEmail" method="POST">
+        <service class="Magestore\Giftvoucher\Api\GiftCode\GiftCodeManagementServiceInterface" method="sendEmail"/>
+        <resources>
+            <resource ref="Magestore_Giftvoucher::giftcard" />
+        </resources>
+    </route>
+
+
+</routes>

@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<!-- ko if: parseInt(window.giftvoucherConfig.settings.interface.custom_image) -->
+<div id="giftcard-template-upload-images" style="" class="form-group ">
+    <label><!-- ko text: 'Or upload your photo' --><!-- /ko -->
+        <small style="font-size: 90%;font-weight: normal;"
+               id="upload-image"
+               class="uploader">
+            <span>&nbsp; (
+                <!-- ko text: 'Recommended size:' --><!-- /ko --> <span id="giftcard-notes-center">600x365</span>
+                <!-- ko text: 'Support gif, jpg, png files. Max file supported:' --><!-- /ko --> <!-- ko text: maximumFileSize --><!-- /ko --> KB)
+            </span>
+        </small>
+    </label>
+    <br>
+    <div id="eventsupload" style="display: none;" data-bind="afterRender: afterRender" >Upload</div>
+
+    <!-- ko if: isShowCustomImage -->
+    <div id="div-image-for-custom" style="position: relative; float: left; border: 2px solid white; clear: both; margin: 10px 0px 5px 15px;"
+         data-bind="css: {'gift-active': isSelectCustomImage}, click: chooseCustomImage">
+        <img id="image-for-custom"
+             data-bind="attr: {src: customImageUrl}"
+             width="68" height="56" alt="image giftcard" style="cursor: pointer;border: 1px solid white;">
+        <div class="egcSwatch-arrow" data-bind="visible: isSelectCustomImage"></div>
+    </div>
+    <!-- /ko -->
+
+
+</div>
+<!-- /ko -->

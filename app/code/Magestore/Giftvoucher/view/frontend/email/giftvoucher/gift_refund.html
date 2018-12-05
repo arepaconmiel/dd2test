@@ -1,0 +1,59 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!--@subject {{trans "Gift card refund from %sendername" sendername=$sendername }} @-->
+<!--@vars
+{"htmlescape var=$name":"Recipient Name",
+"htmlescape var=$sendername":"Sender name",
+"var code":"Gift Card Code",
+"var balance":"Gift Card Balance",
+"var status":"Status",
+"htmlescape var=$message":"Message",
+"var expiredat":"Expired At"}
+@-->
+
+<!--@styles
+body,td { background:#FFFFFF; margin:0; padding:0; color:#2f2f2f; font:13px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+pre{ white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
+@-->
+
+<div style="font:13px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="660">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{var store.getBaseUrl()}}">
+                                <img src="{{var logo_url}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="660">
+                    <tr>
+                        <td valign="top">
+                            <p>
+                                <strong>{{trans "Dear %receivename" receivename=$receivename }}</strong>,<br/>
+                                {{trans "We regret to inform you that "}}<strong>{{var sendername}}</strong>
+                                {{trans " has requested a refund for the Gift Card order at %store_name." store_name=$store.getFrontendName()}}<br/>
+                                {{trans "Hence, the Gift Card %code you received is no longer valid to purchase other products at our store." code=$code}}<br/>
+                            </p>
+                            <p>
+                                {{trans "If you have any questions on your Gift card, please feel free to contact us at "}}
+                                <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>
+                                {{trans " or by phone at "}} {{config path='general/store_information/phone'}}.
+                            </p>
+                            <p>{{trans "Hopefully we will have other opportunities to serve you in the future."}}</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

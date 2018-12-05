@@ -1,0 +1,102 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magestore\Giftvoucher\Block\Account\GiftCode $block
+ * @var \Magestore\Giftvoucher\Block\Account\GiftCode $this
+ */
+
+$_giftCard = $block->getGiftVoucher();
+$_history = $block->getGiftCardHistory($_giftCard);
+
+?>
+<div class="gift-card">
+	<?php echo $block->getChildHtml('giftvoucher.basic') ?>
+	
+	<?php if ($_history->count()): ?>
+    	<div class="block">
+    		<div class="block-title">
+    			<strong><?php echo __('History') ?></strong>
+    		</div>
+    		<div class="block-content">
+    			<div class="table-wrapper gift-code-history">
+    				<table class="data table table-gift-code-history" id="gift-code-history-table">
+            			<caption class="table-caption"><?php /* @escapeNotVerified */ echo __('History') ?></caption>
+            			<thead>
+            				<tr>
+            					<th scope="col" class="col action"><?php /* @escapeNotVerified */ echo __('Action') ?></th>
+            					<th scope="col" class="col balance"><?php /* @escapeNotVerified */ echo __('Balance') ?></th>
+            					<th scope="col" class="col date"><?php /* @escapeNotVerified */ echo __('Date') ?></th>
+            					<th scope="col" class="col balance-change"><?php /* @escapeNotVerified */ echo __('Balance Change') ?></th>
+            					<th scope="col" class="col order"><?php /* @escapeNotVerified */ echo __('Order') ?></th>
+            					<th scope="col" class="col comment"><?php /* @escapeNotVerified */ echo __('Comment') ?></th>
+            				</tr>
+            			</thead>
+            			<tbody>
+            				<?php foreach ($_history as $_item): ?>
+            					<tr>
+            						<td data-th="<?php echo $block->escapeHtml(__('Action')) ?>" class="col action">
+            							<?php echo $block->getActionName($_item) ?>
+            						</td>
+            						<td data-th="<?php echo $block->escapeHtml(__('Balance'))?>" class="col balance">
+            							<?php
+            							if (is_null($_item->getBalance())) {
+            							    echo __('N/A');
+            							} else {
+            							    echo $block->formatCurrency($_item->getBalance(), $_item->getCurrency());
+            							}
+            							?>
+            						</td>
+            						<td data-th="<?php echo $block->escapeHtml(__('Date'))?>" class="col date">
+            							<?php echo $block->formatDate($_item->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?>
+            						</td>
+            						<td data-th="<?php echo $block->escapeHtml(__('Balance Change'))?>" class="col balance-change">
+            							<?php echo $block->formatCurrency($_item->getAmount(), $_item->getCurrency()); ?>
+            						</td>
+            						<td data-th="<?php echo $block->escapeHtml(__('Order'))?>" class="col order">
+            							<?php if ($_item->getOrderIncrementId()): ?>
+            								<a title="<?php echo __('View Order') ?>"
+            								href="<?php echo $this->getUrl('sales/order/view', array('order_id' => $_item->getOrderId())) ?>"><?php echo $_item->getOrderIncrementId() ?></a>
+            							<?php else: ?>
+            								<?php echo __('N/A') ?>
+            							<?php endif; ?>
+            						</td>
+            						<td data-th="<?php echo $block->escapeHtml(__('Comment'))?>" class="col comment">
+            							<?php
+            							if ($_item->getCustomerId() == $block->getCustomerId()) {
+            							    echo $_item->getComments();
+            							} elseif ($email_history = $_item->getCustomerEmail()) {
+            							    echo $_item->getExtraContent() . ' (' . $email_history . ')';
+            							} elseif ($_item->getExtraContent()) {
+            							    echo $_item->getExtraContent();
+            							} else {
+            							    echo $_item->getComments();
+            							}
+            							?>
+            						</td>
+            					</tr>
+            				<?php endforeach; ?>
+            			</tbody>
+        			</table>
+    			</div>
+    		</div>
+    	</div>
+	<?php endif; ?>
+	
+	<div class="actions-toolbar actions-toolbar__sketch">
+        <div class="primary">
+            <button type="button" title="<?php echo __('Email to Friend') ?>" class="action primary"
+            	onclick="window.location.href = '<?php echo $this->getUrl('*/*/email', array('id' => $this->getCustomerGift()->getId())) ?>'">
+            	<span><?php echo __('Email to Friend') ?></span>
+            </button>
+        </div>
+        <div class="form-group">
+            <p class="back-link"><a href="<?php echo $block->getUrl('*/*/') ?>"><small>« </small><?php echo __('Back') ?></a></p>
+        </div>
+    </div>
+</div>

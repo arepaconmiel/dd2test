@@ -1,0 +1,16 @@
+{
+    "name": "magestore/giftvoucher-magento2",
+    "description": "N/A",
+    "require": {
+    },
+    "type": "magento2-module",
+    "version": "2.2.0",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Magestore\\Giftvoucher\\": ""
+        }
+    }
+}

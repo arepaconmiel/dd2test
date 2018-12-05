@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">giftcard_code_form.giftcard_code_form_data_source</item>
+            <item name="deps" xsi:type="string">giftcard_code_form.giftcard_code_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">giftcard_code_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\Form\Button\BackButton</item>
+            <item name="delete" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\Form\Button\DeleteButton</item>
+            <item name="reset" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\Form\Button\ResetButton</item>
+            <item name="print" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\Giftvoucher\Edit\Button\PrintButton</item>
+            <item name="save" xsi:type="string">Magestore\Giftvoucher\Block\Adminhtml\Giftvoucher\Edit\Button\Save</item>
+        </item>
+    </argument>
+    <dataSource name="giftcard_code_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magestore\Giftvoucher\Ui\DataProvider\Giftvoucher\DataProvider</argument>
+            <argument name="name" xsi:type="string">giftcard_code_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">giftvoucher_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="giftvoucheradmin/giftvoucher/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string"/>
+            </item>
+        </argument>
+        <field name="giftvoucher_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="dataScope" xsi:type="string">giftvoucher_id</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </field>
+        <field name="gift_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Gift Code Pattern</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="dataScope" xsi:type="string">gift_code</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[
+                    Examples:<br/><strong>[A.8] : 8 alpha<br/>[N.4] : 4 numeric<br/>[AN.6] : 6 alphanumeric<br/>GIFT-[A.4]-[AN.6] : GIFT-ADFA-12NF0O</strong>
+                    ]]></item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+        </field>
+        <field name="balance">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Gift Code Value</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="dataScope" xsi:type="string">balance</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-small</item>
+                    <item name="sortOrder" xsi:type="number">300</item>
+        		</item>
+        	</argument>
+        </field>
+        <field name="currency">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="formElement" xsi:type="string">select</item>
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">currency</item>
+                    <item name="label" xsi:type="string" translate="true">Currency</item>
+                    <item name="sortOrder" xsi:type="number">400</item>
+        		</item>
+        		<item name="options" xsi:type="object">Magestore\Giftvoucher\Model\Source\Giftvoucher\CurrencyOptions</item>
+        	</argument>
+        </field>
+        <field name="status">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="formElement" xsi:type="string">select</item>
+        			<item name="dataType" xsi:type="string">number</item>
+                    <item name="dataScope" xsi:type="string">status</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="sortOrder" xsi:type="number">500</item>
+        		</item>
+        		<item name="options" xsi:type="object">Magestore\Giftvoucher\Model\Status</item>
+        	</argument>
+        </field>
+        <field name="expired_at">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="formElement" xsi:type="string">date</item>
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">expired_at</item>
+                    <item name="label" xsi:type="string" translate="true">Expired on</item>
+                    <item name="sortOrder" xsi:type="number">600</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-date" xsi:type="boolean">true</item>
+                    </item>
+        		</item>
+        	</argument>
+        </field>
+        <field name="store_id">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="formElement" xsi:type="string">select</item>
+        			<item name="dataType" xsi:type="string">number</item>
+                    <item name="dataScope" xsi:type="string">store_id</item>
+                    <item name="label" xsi:type="string" translate="true">Store view</item>
+                    <item name="sortOrder" xsi:type="number">700</item>
+        		</item>
+        		<item name="options" xsi:type="object">Magestore\Giftvoucher\Model\Source\Giftvoucher\StoresOptions</item>
+        	</argument>
+        </field>
+        <field name="giftvoucher_comments">
+        	<argument name="data" xsi:type="array">
+        		<item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">giftcard_code</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+        			<item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">giftvoucher_comments</item>
+                    <item name="label" xsi:type="string" translate="true">Last comment</item>
+                    <item name="sortOrder" xsi:type="number">800</item>
+        		</item>
+        	</argument>
+        </field>
+    </fieldset>
+    <fieldset name="conditions">
+    	<argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Shopping Cart Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <fieldset name="description_fieldset">
+	    	<argument name="data" xsi:type="array">
+	            <item name="config" xsi:type="array">
+	                <item name="label" xsi:type="string" translate="true">Describe conditions applied to shopping cart when using this gift code</item>
+	            </item>
+	        </argument>
+	        <field name="description">
+	            <argument name="data" xsi:type="array">
+	        		<item name="config" xsi:type="array">
+	                    <item name="source" xsi:type="string">giftcard_code</item>
+	                    <item name="formElement" xsi:type="string">wysiwyg</item>
+	        			<item name="dataType" xsi:type="string">text</item>
+	                    <item name="dataScope" xsi:type="string">description</item>
+	                    <item name="label" xsi:type="string" />
+	                    <item name="wysiwyg" xsi:type="boolean">true</item>
+	        		</item>
+	        	</argument>
+	        </field>
+	    </fieldset>
+	    <container name="conditions_apply_to">
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magestore\Giftvoucher\Block\Adminhtml\Giftvoucher\Edit\Tab\Conditions</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="actions">
+    	<argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Cart Item Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <container name="actions_apply_to">
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magestore\Giftvoucher\Block\Adminhtml\Giftvoucher\Edit\Tab\Actions</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="message_information">
+    	<argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Message Information</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <fieldset name="customer_fieldset">
+	    	<argument name="data" xsi:type="array">
+	            <item name="config" xsi:type="array">
+	                <item name="label" xsi:type="string" translate="true">Customer</item>
+	                <item name="collapsible" xsi:type="boolean">false</item>
+	            </item>
+	        </argument>
+	        <field name="customer_name">
+            	<argument name="data" xsi:type="array">
+	                <item name="config" xsi:type="array">
+	                    <item name="source" xsi:type="string">giftcard_code</item>
+	                    <item name="dataType" xsi:type="string">text</item>
+	                    <item name="formElement" xsi:type="string">input</item>
+	                    <item name="dataScope" xsi:type="string">customer_name</item>
+	                    <item name="label" xsi:type="string" translate="true">Customer Name</item>
+	                </item>
+	            </argument>
+	        </field>
+	        <field name="customer_email">
+            	<argument name="data" xsi:type="array">
+	                <item name="config" xsi:type="array">
+	                    <item name="source" xsi:type="string">giftcard_code</item>
+	                    <item name="dataType" xsi:type="string">text</item>
+	                    <item name="formElement" xsi:type="string">input</item>
+	                    <item name="dataScope" xsi:type="string">customer_email</item>
+	                    <item name="label" xsi:type="string" translate="true">Customer Email</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-email" xsi:type="boolean">true</item>
+                        </item>
+	                </item>
+	            </argument>
+	        </field>
+	    </fieldset>
+	    <fieldset name="recipient_fieldset">
+	    	<argument name="data" xsi:type="array">
+	            <item name="config" xsi:type="array">
+	                <item name="label" xsi:type="string" translate="true">Recipient</item>
+	                <item name="collapsible" xsi:type="boolean">false</item>
+	            </item>
+	        </argument>
+	        <field name="recipient_name">
+            	<argument name="data" xsi:type="array">
+	                <item name="config" xsi:type="array">
+	                    <item name="source" xsi:type="string">giftcard_code</item>
+	                    <item name="dataType" xsi:type="string">text</item>
+	                    <item name="formElement" xsi:type="string">input</item>
+	                    <item name="dataScope" xsi:type="string">recipient_name</item>
+	                    <item name="label" xsi:type="string" translate="true">Recipient Name</item>
+	                </item>
+	            </argument>
+	        </field>
+	        <field name="recipient_email">
+            	<argument name="data" xsi:type="array">
+	                <item name="config" xsi:type="array">
+	                    <item name="source" xsi:type="string">giftcard_code</item>
+	                    <item name="dataType" xsi:type="string">text</item>
+	                    <item name="formElement" xsi:type="string">input</item>
+	                    <item name="dataScope" xsi:type="string">recipient_email</item>
+	                    <item name="label" xsi:type="string" translate="true">Recipient Email</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-email" xsi:type="boolean">true</item>
+                        </item>
+	                </item>
+	            </argument>
+	        </field>
+	    </fieldset>
+	    <fieldset name="recipient_address_fieldset">
+	    	<argument name="data" xsi:type="array">
+	            <item name="config" xsi:type="array">
+	                <item name="label" xsi:type="string" translate="true">Shipping Address</item>
+	                <item name="collapsible" xsi:type="boolean">false</item>
+	            </item>
+	        </argument>
+	        <field name="recipient_address">
+            	<argument name="data" xsi:type="array">
+	                <item name="config" xsi:type="array">
+	                    <item name="source" xsi:type="string">giftcard_code</item>
+	                    <item name="dataType" xsi:type="string">text</item>
+	                    <item name="formElement" xsi:type="string">textarea</item>
+	                    <item name="dataScope" xsi:type="string">recipient_address</item>
+	                    <item name="label" xsi:type="string" translate="true">Recipient Address</item>
+	                </item>
+	            </argument>
+	        </field>
+	    </fieldset>
+	    <fieldset name="message_fieldset">
+	    	<argument name="data" xsi:type="array">
+	            <item name="config" xsi:type="array">
+	                <item name="label" xsi:type="string" translate="true">Message</item>
+	                <item name="collapsible" xsi:type="boolean">false</item>
+	            </item>
+	        </argument>
+	        <field name="message">
+            	<argument name="data" xsi:type="array">
+	                <item name="config" xsi:type="array">
+	                    <item name="source" xsi:type="string">giftcard_code</item>
+	                    <item name="dataType" xsi:type="string">text</item>
+	                    <item name="formElement" xsi:type="string">textarea</item>
+	                    <item name="dataScope" xsi:type="string">message</item>
+	                    <item name="label" xsi:type="string" translate="true">Message</item>
+	                </item>
+	            </argument>
+	        </field>
+	    </fieldset>
+    </fieldset>
+</form>

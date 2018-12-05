@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <renderers>
+        <page type="invoice">
+            <renderer product_type="giftvoucher">Magestore\Giftvoucher\Model\Pdf\Invoice\Item</renderer>
+        </page>
+        <page type="shipment">
+            <renderer product_type="giftvoucher">Magestore\Giftvoucher\Model\Pdf\Shipment\Item</renderer>
+        </page>
+        <page type="creditmemo">
+            <renderer product_type="giftvoucher">Magestore\Giftvoucher\Model\Pdf\Creditmemo\Item</renderer>
+        </page>
+    </renderers>
+    <totals>        
+        <total name="giftvoucher">
+            <title>Gift Card</title>
+            <source_field>gift_voucher_discount</source_field>
+            <model>Magestore\Giftvoucher\Model\Total\Pdf\Giftvoucher</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>220</sort_order>
+        </total>
+        <total name="giftcardcredit">
+            <title>Customer Credit</title>
+            <source_field>use_gift_credit_amount</source_field>
+            <model>Magestore\Giftvoucher\Model\Total\Pdf\Giftcardcredit</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>210</sort_order>
+        </total>
+    </totals>
+</config>

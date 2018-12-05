@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+        <system>
+            <section id="emailsreport_options" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Direct Rewards Statement</label>
+                <tab>qxd</tab>
+                <resource>Qxd_Emailsreport::config</resource>
+                <group id="configure_emailsreport" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Direct Rewards Statement settings</label>
+
+                    <field id="emailsreport_sender" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Sender Account</label>
+                        <comment>This email account will send Reward Reports</comment>
+                    </field>
+
+                    <field id="emailsreport_emaillist" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Emails</label>
+                        <comment>This email accounts will receive all reports. For multiple accounts add them separated by ,</comment>
+                    </field>
+
+                    <field id="emailsreport_generate_reports" translate="label" type="button" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Synchronize Media</label>
+                        <frontend_model>Qxd\Emailsreport\Block\System\Config\Form\Reportbutton</frontend_model>
+                    </field>
+                </group>
+            </section>
+        </system>
+    </config>
+

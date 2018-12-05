@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magestore\Giftvoucher\Ui\DataProvider\Product\ProductDataProvider">
+        <arguments>
+            <argument name="addFieldStrategies" xsi:type="array">
+                <item name="websites" xsi:type="object">Magento\Catalog\Ui\DataProvider\Product\AddWebsitesFieldToCollection</item>
+                <item name="qty" xsi:type="object">Magento\CatalogInventory\Ui\DataProvider\Product\AddQuantityFieldToCollection</item>
+            </argument>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="store_id" xsi:type="object">Magento\Catalog\Ui\DataProvider\Product\AddStoreFieldToCollection</item>
+                <item name="qty" xsi:type="object">Magento\CatalogInventory\Ui\DataProvider\Product\AddQuantityFilterToCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Button\Back">
+        <plugin name="button_back_to_gift_product" type="Magestore\Giftvoucher\Plugin\Catalog\Block\Adminhtml\Product\Edit\Button\Back"/>
+    </type>
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="giftvoucher" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\Giftvoucher\Ui\DataProvider\Product\Form\Modifier\Giftvoucher</item>
+                    <item name="sortOrder" xsi:type="number">99999</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Sales\Model\Order\Item">
+        <plugin name="giftcard_sales_order_item" type="Magestore\Giftvoucher\Plugin\Sales\Model\Order\Item"/>
+    </type>    
+</config>

@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<!-- ko if: templateId && templateImages && templateImages[templateId] -->
+  <ul class="image-select">
+    <!-- ko foreach: templateImages[templateId] -->
+      <li class="image-select__item">
+        <label class="image-select__label" data-bind="attr: {for: $parent.uid + '_' + $index()}">
+          <input class="image-select__radio" type="radio" data-bind="
+            click: $parent.clickImage,
+            attr: {
+              name: $parent.inputName,
+              id: $parent.uid + '_' + $index(),
+              checked: ($parent.value() == $data) ? 'checked' : false,
+              disabled: $parent.disabled,
+              value: $data
+          }" />
+          <img class="image-select__image" data-bind="
+            attr: {
+              src: $parent.mediaUrl + $data,
+              width: $parent.width
+            }" />
+        </label>
+      </li>
+    <!-- /ko -->
+  </ul>
+<!-- /ko -->

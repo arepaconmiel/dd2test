@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote_address">
+            <field name="gift_voucher_gift_codes">
+                <aspect name="to_order" />
+            </field>
+        </fieldset>
+        <fieldset id="sales_convert_quote">
+            <field name="codes_base_discount">
+                <aspect name="to_order" />
+            </field>
+            <field name="codes_discount">
+                <aspect name="to_order" />
+            </field>
+            <field name="gift_voucher_gift_codes">
+                <aspect name="to_order" />
+            </field>
+            <field name="gift_voucher_gift_codes_discount">
+                <aspect name="to_order" />
+            </field>
+            <field name="base_giftvoucher_discount_for_shipping">
+                <aspect name="to_order" />
+            </field>
+            <field name="giftvoucher_discount_for_shipping">
+                <aspect name="to_order" />
+            </field>
+            <field name="base_gift_voucher_discount">
+                <aspect name="to_order" />
+            </field>
+            <field name="gift_voucher_discount">
+                <aspect name="to_order" />
+            </field>
+            <field name="giftvoucher_base_hidden_tax_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="giftvoucher_hidden_tax_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="giftvoucher_base_shipping_hidden_tax_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="giftvoucher_shipping_hidden_tax_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="magestore_base_discount">
+                <aspect name="to_order" />
+            </field>
+            <field name="magestore_discount">
+                <aspect name="to_order" />
+            </field>
+        </fieldset>
+        <fieldset id="quote_convert_item">
+            <field name="base_gift_voucher_discount">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="gift_voucher_discount">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="giftvoucher_base_hidden_tax_amount">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="giftvoucher_hidden_tax_amount">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="magestore_base_discount">
+                <aspect name="to_order" />
+            </field>
+            <field name="magestore_discount">
+                <aspect name="to_order" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

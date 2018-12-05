@@ -1,0 +1,137 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magestore\Giftvoucher\Block\Account\View $block
+ * @var \Magestore\Giftvoucher\Block\Account\View $this
+ */
+
+$_giftCodes = $block->getGiftCodes();
+
+?>
+
+<div class="customer-account-giftcard">
+    <div class="gift-codes-actions">
+        <div class="gift-codes-actions__note">
+            <span>"<?php echo __('Date is set in timezone') ?> <?php echo $block->getTimezone() ?>"</span>
+        </div>
+        <div class="gift-codes-actions__right-buttons">
+            <div class="gift-codes-actions__add">
+                <button type="button" class="action primary add" onclick="window.location.href = '<?php echo $this->getUrl('*/*/add') ?>'">
+                    <span><?php echo __('Add a Gift Card') ?></span>
+                </button>
+            </div>
+            <div class="gift-codes-actions__search">
+                <form class="form gift-codes-search" id="search_gift_code_form" action="<?php echo $block->getUrl('*/*/*') ?>" method="get">
+                    <div class="field">
+                        <label class="label gift-codes-search__label" for="search-gift-code" data-role="gift-codes-search-label">
+                            <span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+                        </label>
+                        <div class="control">
+                            <input id="search-gift-code"
+                                   data-mage-init='{"searchGiftCodes":{
+                                       "formSelector": "#search_gift_code_form"
+                                   }}'
+                                   type="text"
+                                   name="qgc"
+                                   value="<?php echo $block->escapeHtml($block->getSearchString()) ?>"
+                                   placeholder="<?php /* @escapeNotVerified */ echo __('Search gift card...'); ?>"
+                                   class="input-text gift-codes-search__input"/>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button type="submit"
+                                title="<?php echo $block->escapeHtml(__('Search')) ?>"
+                                class="action gift-codes-search__submit">
+                            <span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="table-wrapper gift-codes-list">
+        <table class="data table table-gift-codes" id="my-gift-codes-table">
+            <caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Gift Codes') ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col code"><?php /* @escapeNotVerified */ echo __('Gift Card Code') ?></th>
+                    <th scope="col" class="col balance"><?php /* @escapeNotVerified */ echo __('Balance') ?></th>
+                    <th scope="col" class="col status"><?php /* @escapeNotVerified */ echo __('Status') ?></th>
+                    <th scope="col" class="col added-date"><?php /* @escapeNotVerified */ echo __('Added Date') ?></th>
+                    <th scope="col" class="col expired-date"><?php /* @escapeNotVerified */ echo __('Expired Date') ?></th>
+                    <th scope="col" class="col actions"><?php /* @escapeNotVerified */ echo __('Actions') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($_giftCodes->count()) :
+                    foreach ($_giftCodes as $_giftCode) : ?>
+                                        <?php $_model = $this->getGiftcodeModel($_giftCode->getVoucherId()) ?>
+                                        <tr <?php if (($_giftCode->getCustomerCheckId() == $block->getCustomer()->getId()
+                                        || $_giftCode->getCustomerEmail() == $block->getCustomer()->getEmail())
+                        && $_giftCode->getRecipientName()) : ?>
+                                            class="gift-card-sent-friend"
+                                            <?php endif; ?>>
+                                            <td data-th="<?php echo $block->escapeHtml(__('Gift Card Code')) ?>" class="col code">
+                                                <?php echo $block->getCodeTxt($_giftCode, $_model->getSetId()) ?>
+                                            </td>
+                                            <td data-th="<?php echo $block->escapeHtml(__('Balance')) ?>" class="col balance"><?php /* @escapeNotVerified */ echo $_model->getBalanceFormated() ?></td>
+                                            <td data-th="<?php echo $block->escapeHtml(__('Status')) ?>" class="col status"><?php /* @escapeNotVerified */ echo $_model->getStatusLabel() ?></td>
+                                            <td data-th="<?php echo $block->escapeHtml(__('Added Date')) ?>" class="col added-date"><?php /* @escapeNotVerified */ echo $block->formatDate($_giftCode->getAddedDate(), \IntlDateFormatter::MEDIUM) ?></td>
+                                            <td data-th="<?php echo $block->escapeHtml(__('Expired Date')) ?>" class="col expired-date"><?php /* @escapeNotVerified */ echo $block->formatDate($_giftCode->getExpiredAt(), \IntlDateFormatter::MEDIUM) ?></td>
+                                            <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                                <a href="<?php echo $block->getUrl('*/*/view', ['id' => $_giftCode->getId()]) ?>">
+                                                    <?php /* @escapeNotVerified */ echo __('View') ?>
+                                                </a>
+                                                |
+                                                <?php if ($block->isAvailable($_giftCode) && $_model->getGiftcardTemplateId() && $block->canPrint($_giftCode)) : ?>
+                                <a href="javascript:void(0);" onclick="window.open('<?php
+                                   echo $block->getUrl('*/*/print', ['id' => $_giftCode->getId()])
+                                ?>', 'newWindow', 'width=1000,height=700,resizable=yes,scrollbars=yes')">
+                                    <?php /* @escapeNotVerified */ echo __('Print') ?>
+                                </a>
+                                |
+                                <?php if ($_giftCode->getRecipientName() && $_giftCode->getRecipientEmail()
+                                    && ($_giftCode->getCustomerId() == $block->getCustomer()->getId()
+                                        || $_giftCode->getCustomerEmail() == $block->getCustomer()->getEmail()
+                                        )
+                                    ) :
+                                ?>
+                                    <a href="<?php echo $block->getUrl('*/*/email', ['id' => $_giftCode->getId()]) ?>">
+                                        <?php /* @escapeNotVerified */ echo __('Email') ?>
+                                    </a>
+                                    |
+                                <?php endif; ?>
+                                                <?php endif; ?>
+                                                <a href="javascript:void(0);" onclick="remove<?php echo $_giftCode->getId()?>()">
+                                <?php /* @escapeNotVerified */ echo __('Remove') ?>
+                                                </a>
+                                                <script type="text/javascript">
+                                remove<?php echo $_giftCode->getId()?> = function() {
+                                    if (confirm('<?php
+                                        /* @escapeNotVerified */ echo __('Are you sure?')
+                                    ?>')) {
+                                        location.href = '<?php echo $block->getUrl('*/*/remove', ['id' => $_giftCode->getId()]) ?>';
+                                    }
+                                                    }
+                                                </script>
+                                            </td>
+                                        </tr>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <tr>
+                        <td colspan="6">
+                            <?php echo __('There are no gift codes matching this selection.') ?>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()) : ?>
+        <div class="toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif; ?>
+</div>

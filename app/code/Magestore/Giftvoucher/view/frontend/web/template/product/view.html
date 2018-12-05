@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="product-giftvoucher-view" data-bind="afterRender: afterRender">
+    <!-- ko foreach: getRegion('giftcard.view.value') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <!-- ko if: (window.giftvoucherConfig.giftCardType != 1) -->
+    <!-- ko foreach: getRegion('giftcard.view.templates') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+
+    <!-- ko foreach: getRegion('giftcard.view.upload') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <!--/ko-->
+    <!-- ko foreach: getRegion('giftcard.view.message') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+
+
+

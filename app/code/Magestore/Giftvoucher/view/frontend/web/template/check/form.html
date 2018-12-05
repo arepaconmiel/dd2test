@@ -1,0 +1,57 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<div id="giftvoucher_form" class="gift-card">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-6">
+                <div  id="giftvoucher-check-balance">
+                    <fieldset class="fieldset checkgiftcard">
+                        <div class="field required form-group">
+                            <label for="giftvoucher_code" class="label" data-bind="i18n:'Enter your gift code'"></label>
+                            <input data-bind="attr:{title:$t('Gift card code')}, enable:canCheck, value:checkingCode, event:{keyup:scanAfter} "
+                                   type="text"
+                                   class="input-text required-entry form-control"
+                                   id="giftvoucher_code"
+                                   name="code"
+                                   onfocus="this.select()"/>
+                        </div>
+                    </fieldset>
+                    <div class="actions-toolbar">
+                        <button data-bind="click: submit, enable:canCheck" type="submit" class="action submit primary"><span><span data-bind="i18n:'Check Gift Card'"></span></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--ko if: hasCodeData()-->
+<h2 class="giftvoucher-form-sub-title" data-bind="i18n:'Result'"></h2>
+<div class="form-group">
+    <div id="giftvoucher-result">
+        <div class="field">
+            <label data-bind="i18n:'Gift card code'" for="result_giftvoucher_code" style="display:inline-block; width: 180px; padding-right: 10px;"></label>
+            <span id="result_giftvoucher_code"><strong data-bind="text:code"></strong></span>
+        </div>
+        <div class="field">
+            <label data-bind="i18n:'Balance'" for="balance" style="display:inline-block; width: 180px; padding-right: 10px;"></label>
+            <span id="balance"><strong data-bind="text:balance"></strong></span>
+        </div>
+        <div class="field" data-bind="visible: hasDescription">
+            <label data-bind="i18n:'Description'" for="description" style="display:inline-block; width: 180px; padding-right: 10px;"></label>
+            <span id="description" style="width:70%" data-bind="text: description"></span>
+        </div>
+        <div class="field">
+            <label  data-bind="i18n:'Status'" for="status" style="display:inline-block; width: 180px; padding-right: 10px;"></label>
+            <span id="status" data-bind="text: status"></span>
+        </div>
+        <div class="field" data-bind="visible:hasExpiredAt">
+            <label data-bind="i18n:'Expired at'" for="expired_at" style="display:inline-block; width: 180px; padding-right: 10px;"></label>
+            <span id="expired_at" data-bind="text:expiredAt"></span>
+        </div>
+    </div>
+</div>
+<!--/ko-->

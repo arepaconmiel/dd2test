@@ -1,0 +1,105 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+if ($block->isEnabled()) :
+    $data = $block->getFormData(false);
+    if ($data['is_buying_giftcard'] == false) :
+?>
+<div class="admin__field field-giftcard-redeem-form" id="admin_giftcard_redeem_form">
+    <label class="admin__field-label">
+        <span><?php echo __("Gift Card")?></span>
+    </label>
+
+    <div class="admin__field-control">
+        <div class="content">
+            <dl id="giftvoucher_container">
+                <dt class="giftvoucher>">
+                    <input type="checkbox"
+                           name="giftvoucher_active"
+                           id="giftvoucher_active"
+                           value="1"
+                            <?php echo (!empty($data['using_codes']))?'checked':'';?>/>
+                    <label for="giftvoucher_active"><?php echo __("Use Gift Card To Checkout")?></label>
+                </dt>
+                <dd id="giftvoucher_form_container" class="giftvoucher <?php echo (!empty($data['using_codes']))?'':'hide';?>">
+                    <button title="<?php echo __("Apply")?>"
+                            type="button" class="action-default scalable"
+                            id="giftvoucher_submit_button"
+                            data-ui-id="widget-button-14">
+                        <span><?php echo __("Apply")?></span>
+                    </button>
+                    <ul class="form-list" id="redeem_form_giftvoucher">
+                        <?php if (!empty($data['using_codes'])) :?>
+                        <li class="giftvoucher_using_codes">
+                            <ul>
+                            <?php foreach ($data['using_codes'] as $usingCode) :?>
+                                <li>
+                                    <div class="admin__field-control using_code_container">
+                                        <label for="giftvoucher"><?php echo $usingCode['code'];?></label>
+                                        <input class="admin__control-text using_code giftvoucher_submit_on_enter" type="text"
+                                               name="giftvoucher[using_codes][<?php echo $usingCode['code'];?>]"
+                                               title="<?php echo __("Gift Card Amount")?>"
+                                               value="<?php echo $usingCode['discount'];?>"
+                                               data-gift_code="<?php echo $usingCode['code'];?>"
+                                               onfocus="this.select()"/>
+                                        <a class="remove_button" data-gift_code="<?php echo $usingCode['code'];?>" href="#"  title="<?php echo __("Remove")?>"><?php echo __("Remove")?></a>
+                                    </div>
+                                </li>
+                            <?php endforeach;?>
+                            </ul>
+                        </li>
+                        <?php endif;?>
+                        <div id="giftvoucher_message">
+                        </div>
+                        <?php
+                        if (!empty($data['existing_codes'])) :?>
+                        <li>
+                            <label for="giftvoucher[existed_code]"><?php echo __("Customer's Gift Card Code(s)")?></label>
+                            <div class="input-box"">
+                                <select title="<?php echo __("Customer Gift Card Code")?>"
+                                        class="admin__control-select"
+                                        id="giftvoucher_existed_code"
+                                        name="giftvoucher[existed_code]" style="width: 205px;">
+                                    <option value=""><?php echo __("-- Please Select --")?></option>
+                                    <?php foreach ($data['existing_codes'] as $existingCode) :?>
+                                    <option value="<?php echo $existingCode['gift_code'];?>"><?php echo $existingCode['gift_code']. '(' . $existingCode['balance']. ')';?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                        </li>
+                        <?php endif;?>
+                        <li>
+                            <label for="giftvoucher[new_code]"><?php echo __("New Gift Card Code")?></label>
+                            <div class="admin__field-control">
+                                <input title="<?php echo __("Gift Card Code")?>"
+                                       type="text" class="admin__control-text giftvoucher_submit_on_enter giftvoucher_new_code" id="giftvoucher_new_code" name="giftvoucher[new_code]" />
+                            </div>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<script>
+    require(["Magestore_Giftvoucher/js/model/redeem/form","Magestore_Giftvoucher/js/view/redeem/form"], function(RedeemModel, RedeemForm){
+        RedeemModel.initData('<?php echo $block->getFormData();?>');
+        RedeemForm().initEvents();
+    });
+</script>
+    <?php else :?>
+    <div class="admin__field field-giftcard-redeem-form" id="admin_giftcard_redeem_form">
+        <label class="admin__field-label">
+            <span><?php echo __('Gift Card') ?></span>
+        </label>
+        <div class="admin__field-control">
+            <div style="margin-left: 20px;"><?php echo __('Gift Cards cannot be used to purchase Gift Card products') ?></div>
+        </div>
+    </div>
+    <?php endif;?>
+<?php endif; ?>

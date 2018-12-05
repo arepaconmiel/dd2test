@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<div class="page-title">
+    <h1><?php echo __('Check Gift card information') ?></h1>
+</div>
+<div class="gift-card" id="check-gift-card-form" data-bind="scope:'check-gift-card-form'">
+    <?php echo $block->getLayout()->getMessagesBlock()->getGroupedHtml() ?>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "#check-gift-card-form": {
+        "Magento_Ui/js/core/app": {
+            "components" : {
+                "check-gift-card-form": {
+                    "component": "Magestore_Giftvoucher/js/view/check/form",
+                    "displayArea": "check-gift-card-form"
+                }
+            }
+        }
+    }
+}
+</script>
+<script>
+    require(["Magestore_Giftvoucher/js/model/check/form"], function(CheckModel){
+        CheckModel.initData('<?php echo $block->getFormData();?>');
+    });
+</script>
+<style>
+    .page-title-wrapper{
+        display: none;
+    }
+    #giftvoucher-result .field{
+        display: flex;
+    }
+    #check-gift-card-form .giftvoucher-form-sub-title{
+        margin-top:20px;
+    }
+    #giftvoucher-check-balance .checkgiftcard{
+        margin-bottom: 10px;
+    }
+</style>
+

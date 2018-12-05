@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magestore\Giftvoucher\Block\Account\PrintBlock $block
+ */
+
+?>
+<style>
+    .giftcode-print-page {
+        margin: 22px;
+    }
+    @media print {
+        .giftcode-print-page {
+            margin: 0;
+        }
+    }
+</style>
+
+<div class="giftcode-print-page">
+	<?php echo $block->printGiftcodeHtml($block->getGiftVoucher());?>
+</div>
+
+<script type="text/javascript">window.print();</script>

@@ -1,0 +1,13 @@
+/*
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/* Fix for grid without button */
+.sticky-header {
+	top: 0px;
+}
+
+.sticky-header .admin__data-grid-header {
+	margin-top: 16px;
+}

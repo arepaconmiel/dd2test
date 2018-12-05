@@ -1,0 +1,100 @@
+<div id="popup-giftcard" class="popup-giftcard-amazon" style="display:none" data-bind="scope:'product_popup'">
+    <a href="javascript:void(0);" id="close-popup-giftcard" data-bind="click: closePopup">&nbsp;</a>
+    <div class="a-popover-wrapper">
+        <div class="a-popover-header">
+            <button data-action="a-popover-close" class="a-button-close a-declarative" aria-label="Close">x</button>
+            <h4 class="a-popover-header-content" id="a-popover-header-1">Preview </h4></div>
+        <div class="a-popover-inner" id="a-popover-content-1"
+             style="height: auto; overflow-y: auto; padding-bottom: 14px;">
+            <div id="gc-preview-wrapper" class="a-section a-spacing-none">
+                <div id="gc-preview-modal-wrapper" class="a-section">
+                    <div id="gc-preview-header-recipient-email-box-wrapper"
+                         class="a-row a-size-base a-color-base a-grid-vertical-align a-grid-center gc-preview-header-recipient-email-box-default-wrapper a-ws-row">
+                        <div class="a-column a-span1"></div>
+                        <div class="a-column a-span10 a-text-left">
+                            <div id="gc-preview-email-data-section" class="a-section">
+                                <div id="gc-preview-email-sent-to-section" class="a-section a-spacing-top-extra-large">
+                                    <span id="gc-preview-sent-to-title" class="a-text-bold">Gift card will be sent to:
+                                        <!-- ko text: recipientName --><!-- /ko --></span>
+                                    <br>
+                                    <span id="gc-preview-sent-to-value"></span>
+                                    <span id="gc-preview-sent-to-on-string" class="gc-text-hidden">on</span>
+                                    <span id="gc-preview-sent-to-on-date" class="a-color-success gc-text-hidden"></span>
+                                </div>
+                                <div id="gc-preview-email-subject-section"
+                                     class="a-section a-spacing-extra-large a-spacing-top-extra-large">
+                                    <span id="gc-preview-subject-title" class="a-text-bold">Subject:</span>
+                                    <br>
+                                    <span id="gc-preview-subject-value"><span></span><!-- ko text: senderName -->
+                                        <!-- /ko --> sent you an Gift Certificate!</span>
+                                </div>
+                                <span id="gc-preview-header-recipient-email-hidden-message"
+                                      class="gc-preview-header-recipient-email-text gc-hide">
+                                    ... and 1 more.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="a-column a-span1 a-span-last a-ws-span-last"></div>
+                    </div>
+                    <div id="gc-preview-template-wrapper" class="a-section">
+                        <table border="0" style="border-collapse: collapse; border-spacing: 0px; margin: 0px auto;">
+                            <tbody>
+                            <tr>
+                                <td valign="middle" style="width: 500px; padding: 30px; text-align: center;"><img
+                                            id="alogo" width="100" src=""></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                        <table class="full-width-table" border="0"
+                               style="width: 500px; border-collapse: separate; border-spacing: 20px; margin: 0px auto;">
+                            <tbody>
+                            <tr>
+                                <td valign="middle" style="padding: 0px; text-align: center; height: 40px;">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "#popup-giftcard": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */
+                echo $block->getJsLayout(); ?>
+            }
+        }
+
+    </script>
+</div>
+
+<div id="bg-fade" style="display: none"></div>
+<style>
+    #bg-fade {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+        z-index: 900; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
+
+</style>
+<script>
+    require(['jquery'], function($) {
+        $('#bg-fade').click(function(){
+            $('#popup-giftcard').hide();
+            $('#bg-fade').hide();
+        });
+    });
+</script>

@@ -1,0 +1,41 @@
+<?php
+/**
+ * Ebizmarts_Mandrill Magento JS component
+ *
+ * @category    Ebizmarts
+ * @package     Ebizmarts_Mandrill
+ * @author      Ebizmarts Team <info@ebizmarts.com>
+ * @copyright   Ebizmarts (http://ebizmarts.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<table>
+    <tr>
+        <td>
+            <button style="" onclick="sendMail('<?php echo $this->getButtonUrl() ?>')" class="scalable" type="button" id="<?php echo $this->getHtmlId() ?>">
+                <span><?php echo $this->escapeHtml($this->getButtonLabel()); ?></span>
+            </button>
+        </td>
+    </tr>
+</table>
+
+<script>
+    require([
+        "jquery",
+        "jquery/ui"
+    ], function(jQuery){
+        sendMail = function($url) {
+            jQuery.ajax(
+                {
+                    type: "POST",
+                    url: $url,
+                    data: {
+                        email: $("mandrill_general_test_email").value,
+                        apikey: $("mandrill_general_apikey").value
+                    },
+                    showLoader: true
+                }
+            );
+        };
+    });
+</script>

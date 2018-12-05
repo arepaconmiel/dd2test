@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Catalog:etc/product_types.xsd">
+    <type name="giftvoucher" label="Gift Card" modelInstance="Magestore\Giftvoucher\Model\Product\Type\Giftvoucher" indexPriority="60" sortOrder="80" isQty="true">
+        <priceModel instance="Magestore\Giftvoucher\Model\Product\Price"/>
+        <customAttributes>
+            <attribute name="refundable" value="true"/>
+        </customAttributes>
+    </type>
+</config>

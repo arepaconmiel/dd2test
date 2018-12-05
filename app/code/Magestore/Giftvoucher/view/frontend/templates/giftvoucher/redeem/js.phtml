@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+if ($block->isEnabled()) {
+?>
+<script>
+    require([
+        "Magestore_Giftvoucher/js/model/redeem/form",
+        "Magento_Checkout/js/model/quote",
+        'Magento_Checkout/js/model/step-navigator'
+    ], function(RedeemModel, quote, stepNavigator){
+        RedeemModel.initData('<?php echo $block->getFormData();?>');
+        quote.totals.subscribe(() => {
+            if(!stepNavigator.isProcessed('shipping')){
+                RedeemModel.reload();
+            }
+        });
+    });
+</script>
+<?php } ?>

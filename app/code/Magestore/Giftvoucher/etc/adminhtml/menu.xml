@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magestore_Giftvoucher::giftcard" title="Gift Card" module="Magestore_Giftvoucher" sortOrder="20" parent="Magento_Backend::marketing" resource="Magestore_Giftvoucher::giftcard"/>
+
+        <add id="Magestore_Giftvoucher::giftproduct" title="Manage Gift Card Products" module="Magestore_Giftvoucher" sortOrder="10" parent="Magestore_Giftvoucher::giftcard" action="giftvoucheradmin/giftProduct/" resource="Magestore_Giftvoucher::giftproduct"/>
+
+        <add id="Magestore_Giftvoucher::giftvoucher" title="Manage Gift Codes" module="Magestore_Giftvoucher" sortOrder="20" parent="Magestore_Giftvoucher::giftcard" action="giftvoucheradmin/giftvoucher" resource="Magestore_Giftvoucher::giftvoucher"/>
+
+        <add id="Magestore_Giftvoucher::generategiftcard" title="Generate Gift Codes" module="Magestore_Giftvoucher" sortOrder="40" parent="Magestore_Giftvoucher::giftcard" action="giftvoucheradmin/giftcodepattern/" resource="Magestore_Giftvoucher::generategiftcard"/>
+
+        <add id="Magestore_Giftvoucher::gifthistory" title="Gift code History" module="Magestore_Giftvoucher" sortOrder="50" parent="Magestore_Giftvoucher::giftcard" action="giftvoucheradmin/gifthistory/" resource="Magestore_Giftvoucher::gifthistory"/>
+
+        <add id="Magestore_Giftvoucher::gifttemplate" title="Manage Templates" module="Magestore_Giftvoucher" sortOrder="60" parent="Magestore_Giftvoucher::giftcard" action="giftvoucheradmin/giftTemplate/" resource="Magestore_Giftvoucher::gifttemplate"/>
+                
+        <add id="Magestore_Giftvoucher::settings" title="Settings" module="Magestore_Giftvoucher" sortOrder="70" parent="Magestore_Giftvoucher::giftcard" action="adminhtml/system_config/edit/section/giftvoucher" resource="Magestore_Giftvoucher::settings"/>
+    </menu>
+</config>

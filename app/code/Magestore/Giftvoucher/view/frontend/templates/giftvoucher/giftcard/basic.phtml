@@ -1,0 +1,96 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magestore\Giftvoucher\Block\Account\GiftCode $block
+ * @var \Magestore\Giftvoucher\Block\Account\GiftCode $this
+ */
+
+$_giftCard = $block->getGiftVoucher();
+$_customerGift = $this->getCustomerGift();
+
+?>
+
+<table class="table gift-code-basic">
+	<tbody>
+		<tr>
+			<td><strong><?php echo __('Gift Card Code') ?></strong></td>
+			<td><?php echo $block->getCodeTxt($_giftCard, $_giftCard->getSetId()) ?></td>
+		</tr>
+		<tr>
+			<td><strong><?php echo __('Balance') ?></strong></td>
+			<td><?php echo $_giftCard->getBalanceFormated() ?></td>
+		</tr>
+		<?php if ($_giftCard->getDescription()): ?>
+			<tr>
+				<td><strong><?php echo __('Description') ?></strong></td>
+				<td><?php echo $_giftCard->getDescription() ?></td>
+			</tr>
+		<?php endif; ?>
+		<tr>
+			<td><strong><?php echo __('Status') ?></strong></td>
+			<td><?php echo $_giftCard->getStatusLabel() ?></td>
+		</tr>
+		<tr>
+			<td><strong><?php echo __('Added Date') ?></strong></td>
+			<td><?php echo $block->formatDate($_customerGift->getAddedDate(), \IntlDateFormatter::MEDIUM) ?></td>
+		</tr>
+		<tr>
+			<td><strong><?php echo __('Expired Date') ?></strong></td>
+			<td><?php
+			    $expired_date = $_giftCard->getData('expired_at');
+			    if (!$expired_date) {
+			        echo __('Permanent');
+			    } else {
+			        echo $block->formatDate($expired_date, \IntlDateFormatter::MEDIUM);
+			    }
+			?></td>
+		</tr>
+		<?php if ($this->checkSendFriendGiftCard($_giftCard)): ?>
+			<tr>
+    			<td><strong><?php echo __('Comment') ?></strong></td>
+    			<td><?php echo __('This is your gift to give for %1 (%2)', $_giftCard->getRecipientName(), $_giftCard->getRecipientEmail()) ?></td>
+    		</tr>
+    		<?php if ($_shipment = $this->getShipmentForGiftCard($_giftCard)): ?>
+    			<?php $tracks = $_shipment->getTracksCollection(); ?>
+    			<tr>
+        			<td><strong><?php echo __('Check Shipping') ?></strong></td>
+        			<td>
+        				<div>
+                            <a href="<?php echo $this->getUrl('sales/order/shipment', array('order_id' => $_shipment->getOrderId())) ?>" title="<?php echo __('View Shipment') ?>"><?php echo __('View Shipment') ?></a>
+                            |
+                            <a href="#" title="<?php echo __('Track the shipment') ?>"
+                            	onclick="popWin('<?php echo $this->getHelper('Magento\Shipping\Helper\Data')->getTrackingPopupUrlBySalesModel($_shipment) ?>', 'trackshipment', 'width=800,height=600,top=0,left=0,resizable=yes,scrollbars=yes');return false;">
+                            	<?php echo __('Track the shipment') ?>
+                            </a>
+                        </div>
+                        <div>
+                            <?php if ($_size = $tracks->count()): ?>
+                                <?php echo __('Tracking Number(s):') ?>
+                                <?php
+                                $i = 1;
+                                foreach ($tracks as $track):
+                                    ?>
+                                    <?php if ($track->isCustom()): ?>
+                                        <?php echo $this->escapeHtml($track->getNumber()) ?>
+                                    <?php else: ?>
+                                        <a href="#" onclick="popWin('<?php echo $this->getHelper('Magento\Shipping\Helper\Data')->getTrackingPopupUrlBySalesModel($track) ?>', 'trackorder', 'width=800,height=600,left=0,top=0,resizable=yes,scrollbars=yes')" ><?php echo $this->escapeHtml($track->getNumber()) ?></a>
+                                    <?php endif; ?>
+                                    <?php if ($i != $_size): ?>, <?php endif; ?>
+                                    <?php
+                                    $i++;
+                                endforeach;
+                                ?>
+                            <?php endif ?>
+                        </div>
+        			</td>
+        		</tr>
+    		<?php endif; ?>
+		<?php endif; ?>
+	</tbody>
+</table>

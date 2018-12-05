@@ -1,0 +1,66 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ */
+
+// @codingStandardsIgnoreFile
+/* @var \Magestore\Giftvoucher\Block\Product\View $block */
+?>
+
+<script>
+    window.giftvoucherConfig = <?php /* @escapeNotVerified */ echo \Zend_Json::encode($block->getGiftvoucherConfig()); ?>;
+</script>
+
+<div class="giftvoucher-product-info gift-card" id="giftvoucher-info" data-bind="scope:'product_view'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#giftvoucher-info": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+            }
+        }
+    </script>
+</div>
+
+<div id="giftvoucher-loader" data-role="giftvoucher-loader" class="loading-mask" data-mage-init='{"checkoutLoader": {}}'>
+    <div class="loader">
+        <img src="<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+             alt="<?php /* @escapeNotVerified */ echo __('Loading...'); ?>"
+             style="position: absolute;">
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "addToWishlist": {"customOptionsInfo":".giftvoucher_custom_option"}
+        }
+    }
+</script>
+
+<script>
+    require([
+        'mage/url',
+        'Magento_Ui/js/block-loader'
+    ], function(url, blockLoader) {
+        blockLoader("<?php /* @escapeNotVerified */ echo $block->getViewFileUrl('images/loader-1.gif'); ?>");
+        return url.setBaseUrl('<?php /* @escapeNotVerified */ echo $block->getBaseUrl();?>');
+    })
+</script>

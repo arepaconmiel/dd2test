@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magestore\Giftvoucher\Block\Account\GiftCode $block
+ * @var \Magestore\Giftvoucher\Block\Account\GiftCode $this
+ */
+
+$_giftCard = $block->getGiftVoucher();
+
+?>
+<div class="gift-card">
+	<?php echo $block->getChildHtml('giftvoucher.basic') ?>
+
+	<form id="email-giftcard-tofriend" method="post" action="<?php echo $this->getUrl('*/*/sendEmail') ?>">
+		<fieldset class="fieldset info">
+			<?php echo $block->getBlockHtml('formkey') ?>
+			<input name="giftcard_id" type="hidden" value="<?php echo $_giftCard->getId() ?>" />
+            <legend class="legend"><span><?php echo __('Email to a Friend') ?></span></legend><br>
+
+    		<div class="field field-name required">
+    			<label class="label" for="recipient_name"><span><?php echo __('Name') ?></span></label>
+            	<div class="control">
+            		<input name="recipient_name" id="recipient_name" value="<?php echo $_giftCard->getRecipientName() ?>" title="<?php echo __('Name') ?>>" class="input-text required-entry form-control" type="text">
+            	</div>
+    		</div>
+
+    		<div class="field field-email required">
+    			<label class="label" for="recipient_email"><span><?php echo __('Email Address') ?></span></label>
+            	<div class="control">
+            		<input name="recipient_email" id="recipient_email" value="<?php echo $_giftCard->getRecipientEmail() ?>" title="<?php echo __('Email Address') ?>>" class="input-text required-entry form-control validate-email" type="text">
+            	</div>
+    		</div>
+
+    		<div class="field">
+    			<label class="label" for="message"><span><?php echo __('Message') ?></span></label>
+            	<div class="control">
+            		<textarea name="message" onchange="changeRemaining(this);" onkeyup="changeRemaining(this);" class="input-text form-control" id="message" cols="3" rows="3"><?php echo $_giftCard->getMessage() ?></textarea>
+            		<small><?php echo __('Characters Remaining: ') ?><span id="giftvoucher_char_remaining"><?php echo $block->messageMaxLen() ?></span></small>
+            	</div>
+        	</div>
+		</fieldset>
+
+		<div class="actions-toolbar actions-toolbar__sketch">
+            <div class="primary">
+                <button type="submit" title="<?php echo __('Send to Friend') ?>" class="action primary"><span><?php echo __('Send to Friend') ?></span></button>
+            </div>
+            <div class="form-group">
+                <p class="back-link"><a href="<?php echo $block->getUrl('*/*/') ?>"><small>« </small><?php echo __('Back') ?></a></p>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    require([
+        "jquery",
+        "mage/mage"
+    ], function ($) {
+        var dataForm = $('#email-giftcard-tofriend');
+        dataForm.mage('validation', {});
+        var remaining_max = <?php echo $this->messageMaxLen() ?>;
+        $('#giftvoucher_char_remaining').html(remaining_max - $('#message').val().length);
+        changeRemaining = function (el) {
+            if (el.value.length > remaining_max) {
+                el.value = el.value.substring(0, remaining_max);
+            }
+            $('#giftvoucher_char_remaining').html(remaining_max - el.value.length);
+        }
+    });
+</script>

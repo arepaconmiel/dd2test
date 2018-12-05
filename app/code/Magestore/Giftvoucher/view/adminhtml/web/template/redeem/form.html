@@ -1,0 +1,65 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<label class="admin__field-label">
+    <span data-bind="i18n:'Gift Card'"></span>
+</label>
+
+<div class="admin__field-control">
+    <div class="content">
+        <dl id="giftvoucher_container">
+            <dt class="giftvoucher>">
+                <input type="checkbox" name="giftvoucher" id="giftvoucher" value="1" data-bind="checked:useGiftcard"/>
+                <label for="giftvoucher" data-bind="i18n:'Use Gift Card to check out'"></label>
+            </dt>
+            <dd class="giftvoucher" data-bind="visible:useGiftcard">
+                <button data-bind="attr:{title:$t('Apply')}, click:submit" type="button" class="action-default scalable"
+                        data-ui-id="widget-button-14">
+                    <span data-bind="i18n:'Apply'"></span>
+                </button>
+                <ul class="form-list" id="redeem_form_giftvoucher">
+                    <li class="giftvoucher-using-code" data-bind="visible:hasUsingCodes">
+                        <ul data-bind="foreach:usingCodes">
+                            <li>
+                                <div class="admin__field-control">
+                                    <label for="giftvoucher" data-bind="text:code" style="font-weight: bold;">
+                                    </label>
+                                    <input class="admin__control-text" type="text"
+                                           title="Gift Card Amount"
+                                           data-bind="value:discount"/>
+                                    [<a href="#"  title="Edit">Edit</a><a href="#"  title="Remove">Remove</a>]
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <div id="giftvoucher_message">
+                    </div>
+                    <li>
+                        <label for="giftvoucher_existed_code"  data-bind="i18n:'Apply customer\'s Gift Card code(s)'"></label>
+                        <div class="input-box" data-bind="visible:hasExistingCodes">
+                            <select data-bind="attr:{title:$t('Customer Gift Card Code')}, event:{change: selectedExistingCode}"
+                                    class="admin__control-select"
+                                    id="giftvoucher_existed_code"
+                                    name="existed_giftvoucher_code" style="width: 205px;">
+                                <option value="" data-bind="i18n:'-- Please Select --'"></option>
+                                <!--ko foreach: existingCodes-->
+                                <option data-bind="value:gift_code, text:$parent.getExistingCodeTitle($data)"></option>
+                                <!--/ko-->
+                            </select>
+                        </div>
+                        <div class="admin__field-control">
+                            <input data-bind="attr:{title:$t('Gift Card Code')}, value: selectedNewCode" type="text" class="admin__control-text" id="giftvoucher_code" name="giftvoucher_code" />
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li style="color: #eb340a;padding-left: 5px;font-size: 11px;font-weight: bold;line-height: 13px; display:none" id="giftcard_notice_1" data-bind="i18n:'Please enter your code'"></li>
+                    <li style="color: #eb340a;padding-left: 5px;font-size: 11px;font-weight: bold;line-height: 13px; display:none" id="giftcard_notice_2" data-bind="i18n:'Please enter or chose your code'"></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</div>

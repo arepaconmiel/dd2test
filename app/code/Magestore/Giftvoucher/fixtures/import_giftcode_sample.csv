@@ -1,0 +1,4 @@
+history_amount,balance,status,customer_name,order_increment_id,recipient_name,created_at,expired_at,store_id,currency,customer_id,customer_email,recipient_email,recipient_address,message,gift_code
+25,25,active,John Doe,100000031,,12/6/2017 4:07,12/5/2020 0:00,1,USD,2,john@example.com,,,,
+100,100,active,John Doe,100000030,Jane,12/6/2017 3:20,6/11/2020 3:20,1,USD,2,john@example.com,jane@example.com,"John Doe 123 Main St\nAnytown, USA",Custom message,
+25,500,pending,John Doe,100000007,Jane,8/29/2017 9:14,8/28/2020 0:00,1,USD,2,john@example.com,jane@example.com,"John Doe 123 Main St\nAnytown, USA",Happy birth day!,

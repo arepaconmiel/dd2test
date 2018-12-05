@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magestore\Giftvoucher\Model\ResourceModel\GiftTemplate\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">giftcard_template</argument>
+            <argument name="eventPrefix" xsi:type="string">gifttemplate_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">gifttemplate_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Giftvoucher\Model\ResourceModel\GiftTemplate</argument>
+        </arguments>
+    </type>
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftTemplateSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftTemplateInterface" type="Magestore\Giftvoucher\Model\GiftTemplate" />
+    <preference for="Magestore\Giftvoucher\Api\GiftTemplateRepositoryInterface" type="Magestore\Giftvoucher\Model\Repository\GiftTemplateRepository" />
+    <preference for="Magestore\Giftvoucher\Api\GiftTemplate\IOServiceInterface" type="Magestore\Giftvoucher\Service\GiftTemplate\IOService" />
+    <preference for="Magestore\Giftvoucher\Api\GiftTemplate\MediaServiceInterface" type="Magestore\Giftvoucher\Service\GiftTemplate\MediaService" />
+    <preference for="Magestore\Giftvoucher\Api\GiftTemplate\ProcessorServiceInterface" type="Magestore\Giftvoucher\Service\GiftTemplate\ProcessorService" />
+    <preference for="Magestore\Giftvoucher\Api\GiftTemplate\SampleDataServiceInterface" type="Magestore\Giftvoucher\Service\GiftTemplate\SampleDataService" />
+    <preference for="Magestore\Giftvoucher\Api\GiftTemplate\TransferDataServiceInterface" type="Magestore\Giftvoucher\Service\GiftTemplate\TransferDataService" />
+    
+    <preference for="Magestore\Giftvoucher\Api\GiftvoucherProduct\OrderManagementInterface" type="Magestore\Giftvoucher\Service\GiftVoucherProduct\OrderManagement" />
+
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="giftcard_code_listing_data_source" xsi:type="string">Magestore\Giftvoucher\Model\ResourceModel\Giftvoucher\Grid\Collection</item>
+                <item name="giftcard_pattern_listing_data_source" xsi:type="string">Magestore\Giftvoucher\Model\ResourceModel\GiftCodePattern\Grid\Collection</item>
+                <item name="giftcard_code_history_listing_data_source" xsi:type="string">Magestore\Giftvoucher\Model\ResourceModel\Giftvoucher\Grid\History</item>
+                <item name="giftcard_history_listing_data_source" xsi:type="string">Magestore\Giftvoucher\Model\ResourceModel\History\Grid\Collection</item>
+                <item name="giftcard_pattern_code_listing_data_source" xsi:type="string">Magestore\Giftvoucher\Model\ResourceModel\GiftCodePattern\Grid\GiftCode</item>
+                <item name="giftcard_template_listing_data_source" xsi:type="string">Magestore\Giftvoucher\Model\ResourceModel\GiftTemplate\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magestore\Giftvoucher\Ui\DataProvider\GiftCodePattern\DataProvider">
+    	<arguments>
+    		<argument name="pool" xsi:type="object">Magestore\Giftvoucher\Ui\DataProvider\GiftCodePattern\Modifier\Pool</argument>
+    	</arguments>
+    </type>
+    <virtualType name="Magestore\Giftvoucher\Ui\DataProvider\GiftCodePattern\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="template" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\Giftvoucher\Ui\DataProvider\GiftCodePattern\Modifier\Template</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="giftcode" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\Giftvoucher\Ui\DataProvider\GiftCodePattern\Modifier\GiftCode</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magestore\Giftvoucher\Ui\DataProvider\Giftvoucher\DataProvider">
+    	<arguments>
+    		<argument name="pool" xsi:type="object">Magestore\Giftvoucher\Ui\DataProvider\Giftvoucher\Modifier\Pool</argument>
+    	</arguments>
+    </type>
+    <virtualType name="Magestore\Giftvoucher\Ui\DataProvider\Giftvoucher\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+    	<arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="history" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\Giftvoucher\Ui\DataProvider\Giftvoucher\Modifier\History</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="template" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\Giftvoucher\Ui\DataProvider\Giftvoucher\Modifier\Template</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- Begin - Add pricing price to price pool for product type is giftvoucher -->
+    <virtualType name="Magestore\Giftvoucher\Pricing\Price\Pool" type="Magento\Framework\Pricing\Price\Pool">
+        <arguments>
+            <argument name="prices" xsi:type="array">
+                <item name="wishlist_configured_price" xsi:type="string">Magestore\Giftvoucher\Pricing\ConfiguredPrice\ConfigurableProduct</item>
+            </argument>
+            <argument name="target" xsi:type="object">Magento\Catalog\Pricing\Price\Pool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magestore\Giftvoucher\Pricing\Price\Collection" type="Magento\Framework\Pricing\Price\Collection">
+        <arguments>
+            <argument name="pool" xsi:type="object">Magestore\Giftvoucher\Pricing\Price\Pool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\Pricing\PriceInfo\Factory">
+        <arguments>
+            <argument name="types" xsi:type="array">
+                <item name="giftvoucher" xsi:type="array">
+                    <item name="infoClass" xsi:type="string">Magento\Framework\Pricing\PriceInfo\Base</item>
+                    <item name="prices" xsi:type="string">Magestore\Giftvoucher\Pricing\Price\Collection</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- End - Add pricing price to price pool for product type is giftvoucher -->
+    <type name="Magestore\Giftvoucher\Model\GiftvoucherConfigProvider\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="giftvoucher_default_config_provider" xsi:type="object">Magestore\Giftvoucher\Model\GiftvoucherConfigProvider\DefaultConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference for="Magestore\Giftvoucher\Api\Data\HistoryInterface" type="Magestore\Giftvoucher\Model\History" />
+    <preference for="Magestore\Giftvoucher\Api\HistoryRepositoryInterface" type="Magestore\Giftvoucher\Model\Repository\HistoryRepository" />
+    <preference for="Magestore\Giftvoucher\Api\Data\HistorySearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftCodePatternInterface" type="Magestore\Giftvoucher\Model\GiftCodePattern" />
+    <preference for="Magestore\Giftvoucher\Api\GiftCodePatternRepositoryInterface" type="Magestore\Giftvoucher\Model\Repository\GiftCodePatternRepository" />
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftCodePatternSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftvoucherSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftvoucherInterface" type="Magestore\Giftvoucher\Model\Giftvoucher" />
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftcodeSendEmailJsonInterface" type="Magestore\Giftvoucher\Model\Data\GiftcodeSendEmailJson" />
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftcodeMassCreateJsonInterface" type="Magestore\Giftvoucher\Model\Data\GiftcodeMassCreateJson" />
+    <preference for="Magestore\Giftvoucher\Api\GiftvoucherRepositoryInterface" type="Magestore\Giftvoucher\Model\Repository\GiftvoucherRepository" />
+
+    <preference for="Magestore\Giftvoucher\Api\GiftCode\GiftCodeManagementServiceInterface" type="Magestore\Giftvoucher\Service\GiftCode\GiftCodeManagementService" />
+     
+    <preference for="Magestore\Giftvoucher\Api\Sales\CancelOrderItemServiceInterface" type="Magestore\Giftvoucher\Service\Sales\CancelOrderItemService" />
+    
+    <preference for="Magestore\Giftvoucher\Api\Sales\RefundOrderItemServiceInterface" type="Magestore\Giftvoucher\Service\Sales\RefundOrderItemService" />
+    
+    <preference for="Magestore\Giftvoucher\Service\Logger\LoggerInterface" type="Magestore\Giftvoucher\Service\Logger\Logger" />
+    
+    <preference for="Magestore\Giftvoucher\Api\Sales\RefundOrderServiceInterface" type="Magestore\Giftvoucher\Service\Sales\RefundOrderService" />
+    
+    <preference for="Magestore\Giftvoucher\Api\Sales\CancelOrderServiceInterface" type="Magestore\Giftvoucher\Service\Sales\CancelOrderService" />
+
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftvoucherProductInterface" type="Magestore\Giftvoucher\Model\GiftvoucherProduct" />
+    
+    <preference for="Magestore\Giftvoucher\Api\GiftvoucherProduct\GiftvoucherProductRepositoryInterface" type="Magestore\Giftvoucher\Model\Repository\GiftvoucherProductRepository" />
+    
+    <type name="Magento\Quote\Model\Quote\Item\Repository">
+        <arguments>
+            <argument name="cartItemProcessors" xsi:type="array">
+                <item name="giftvoucher" xsi:type="object">Magestore\Giftvoucher\Model\Quote\Item\CartItemProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
+        <arguments>
+            <argument name="processorPool" xsi:type="array">
+                <item name="giftvoucher" xsi:type="object">Magestore\Giftvoucher\Model\ProductOptionProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="giftvoucher_sales_model_order" type="Magestore\Giftvoucher\Plugin\Sales\Model\Order" sortOrder="1" disabled="false"/>
+    </type>    
+    
+    <type name="Magento\Sales\Model\Order\Creditmemo">
+        <plugin name="giftvoucher_sales_model_order_creditmemo" type="Magestore\Giftvoucher\Plugin\Sales\Model\Order\Creditmemo" sortOrder="1" disabled="false"/>
+    </type>
+
+    <preference for="Magestore\Giftvoucher\Api\Redeem\CheckoutServiceInterface" type="Magestore\Giftvoucher\Service\Redeem\CheckoutService" />
+
+    <preference for="Magestore\Giftvoucher\Api\Data\GiftCardOptionInterface" type="Magestore\Giftvoucher\Model\Giftcard\Option" />
+    <type name="Magento\Quote\Model\Quote\Item\Repository">
+        <arguments>
+            <argument name="cartItemProcessors" xsi:type="array">
+                <item name="giftvoucher" xsi:type="object">Magestore\Giftvoucher\Model\Quote\Item\CartItemProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Api\OrderItemRepositoryInterface">
+        <arguments>
+            <argument name="processorPool" xsi:type="array">
+                <item name="giftvoucher" xsi:type="object">Magestore\Giftvoucher\Model\ProductOptionProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="append_gift_card_data_to_order" type="Magestore\Giftvoucher\Plugin\QuoteItem"/>
+    </type>
+
+    <type name="Magento\Checkout\CustomerData\AbstractItem">
+        <plugin name="change_product_image_minicart" type="Magestore\Giftvoucher\Plugin\Minicart\Image" sortOrder="1"/>
+    </type>
+
+    <!-- Decrease discount value to show in total -->
+    <type name="Magento\SalesRule\Model\Quote\Discount">
+        <plugin name="giftvoucher_salesrules_discount_fetch_after" type="Magestore\Giftvoucher\Plugin\SalesRule\Quote\Discount" sortOrder="20"/>
+    </type>
+    <!-- Decrease discount value is showed when get cart totals-->
+    <type name="Magento\Quote\Model\Cart\CartTotalRepository">
+        <plugin name="giftvoucher_get_cat_totals_after" type="Magestore\Giftvoucher\Plugin\Quote\Cart\CartTotalRepository" sortOrder="20"/>
+    </type>
+</config>

@@ -1,0 +1,254 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="giftvoucher_fieldset" class="Magestore\Giftvoucher\Ui\Component\Form\Fieldset\Giftvoucher">
+
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Gift Price Setting</item>
+                <item name="sortOrder" xsi:type="number">1000</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="gift_type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magestore\Giftvoucher\Model\Source\GiftType</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Type of Gift Card value</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_type</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gift_value">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magestore_Giftvoucher/js/giftvoucher-price</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="toggleDisable" xsi:type="string">${ $.parentName}.gift_type:value</item>
+                    </item>
+                    <item name="valuesForEnable" xsi:type="array">
+                        <item name="1" xsi:type="string">1</item>
+                    </item>
+                    <item name="label" xsi:type="string">Gift Card value</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">decimal</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_value</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="addbefore" xsi:type="string">$</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gift_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magestore_Giftvoucher/js/giftvoucher-price</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="toggleDisable" xsi:type="string">${ $.parentName}.gift_type:value</item>
+                    </item>
+                    <item name="valuesForEnable" xsi:type="array">
+                        <item name="2" xsi:type="string">2</item>
+                    </item>
+                    <item name="label" xsi:type="string">Minimum Gift Card value</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">decimal</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_from</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="addbefore" xsi:type="string">$</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gift_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magestore_Giftvoucher/js/giftvoucher-price</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="setValueForValidateGreatThan" xsi:type="string">${ $.parentName}.gift_from:value</item>
+                        <item name="handleChanges" xsi:type="string">${ $.parentName}.gift_to:value</item>
+                        <item name="toggleDisable" xsi:type="string">${ $.parentName}.gift_type:value</item>
+                    </item>
+                    <item name="valuesForEnable" xsi:type="array">
+                        <item name="2" xsi:type="string">2</item>
+                    </item>
+                    <item name="label" xsi:type="string">Maximum Gift Card value</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">decimal</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_to</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="addbefore" xsi:type="string">$</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gift_dropdown">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magestore_Giftvoucher/js/giftvoucher-price</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="toggleDisable" xsi:type="string">${ $.parentName}.gift_type:value</item>
+                    </item>
+                    <item name="valuesForEnable" xsi:type="array">
+                        <item name="3" xsi:type="string">3</item>
+                    </item>
+                    <item name="label" xsi:type="string">Gift Card values</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_dropdown</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">The price is like 10,20,30...</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gift_price_type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magestore\Giftvoucher\Model\Source\GiftPriceType</item>
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magestore_Giftvoucher/js/giftvoucher-select-price</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="toggleDisable" xsi:type="string">${ $.parentName}.gift_type:value</item>
+                    </item>
+                    <item name="valuesForEnable" xsi:type="array">
+                        <item name="1" xsi:type="string">1</item>
+                        <item name="2" xsi:type="string">2</item>
+                        <item name="3" xsi:type="string">3</item>
+                    </item>
+                    <item name="label" xsi:type="string">Type of Gift Card price</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_price_type</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gift_price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magestore_Giftvoucher/js/giftvoucher-price</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="toggleDisable" xsi:type="string">${ $.parentName}.gift_price_type:value</item>
+                    </item>
+                    <item name="valuesForEnable" xsi:type="array">
+                        <item name="2" xsi:type="string">2</item>
+                    </item>
+                    <item name="label" xsi:type="string">Gift Card price</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">decimal</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_price</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="addbefore" xsi:type="string">$</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">If the type of Gift Card is Drop-Down, please enter the price like 10,20,30...</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gift_percent">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magestore_Giftvoucher/js/giftvoucher-price</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="toggleDisable" xsi:type="string">${ $.parentName}.gift_price_type:value</item>
+                    </item>
+                    <item name="valuesForEnable" xsi:type="array">
+                        <item name="3" xsi:type="string">3</item>
+                    </item>
+                    <item name="label" xsi:type="string">Percentage</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">decimal</item>
+                    <item name="dataScope" xsi:type="string">data.product.gift_price</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                        <item name="validate-greater-than-zero" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="addbefore" xsi:type="string">%</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+
+    <fieldset name="shopping_cart_conditions" class="Magestore\Giftvoucher\Ui\Component\Form\Fieldset\Giftvoucher">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Shopping Cart Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">1100</item>
+            </item>
+        </argument>
+        <container name="conditions_apply_to" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magestore\Giftvoucher\Block\Adminhtml\Product\Tab\Conditions</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+
+    <fieldset name="cart_item_conditions" class="Magestore\Giftvoucher\Ui\Component\Form\Fieldset\Giftvoucher">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Cart Item Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">1200</item>
+            </item>
+        </argument>
+        <container name="cart_item_conditions_apply_to" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Magestore\Giftvoucher\Block\Adminhtml\Product\Tab\Actions</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

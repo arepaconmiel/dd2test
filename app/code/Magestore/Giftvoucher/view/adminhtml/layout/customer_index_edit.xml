@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body> 
+        <referenceBlock name="customer_form">
+            <block acl="Magestore_Giftvoucher::gifthistory" class="Magestore\Giftvoucher\Block\Adminhtml\Customer\Tab\History" name="giftcard_history" >
+                <arguments>
+                    <argument name="tab_label" xsi:type="string" translate="true">Gift Card History</argument>
+                    <argument name="sort_order" xsi:type="number">11</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

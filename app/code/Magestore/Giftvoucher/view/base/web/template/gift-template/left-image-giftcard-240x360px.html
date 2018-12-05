@@ -1,0 +1,87 @@
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<!--@vars
+{"var giftImageUrl":"Gift Card Image Url",
+"var logo_url":"Logo image url",
+"var textColor":"Text Color",
+"var styleColor":"Special Text Color",
+"var senderName":"Sender Name",
+"var recipientName":"Recipient Name",
+"var giftMessage":"Gift Message",
+"var giftValue":"Value of Gift Card",
+"var giftCode":"Gift code string",
+"var barcodeUrl":"Barcode image url",
+"var expiredDate":"Expired Date of Gift code",
+"var notes":"Gift Card notes"}
+@-->
+<div style="overflow: hidden;max-width: 640px;font-size: 14px;background-size: 100% 100%;border-radius: 4px;box-shadow: rgb(202, 202, 202) 1px 1px 1px 2px !important;border-collapse: collapse;border-spacing: 0px;margin: 0px auto; border:2px solid rgb(202, 202, 202);font-family:'Open Sans',sans-serif;">
+    <div style="width:37%;height: 360px;padding-bottom:0;position: relative;float:left;">      
+        <img
+             src="{{var giftImageUrl}}"
+             style="width:100%;height:360px" />    
+    </div>
+    <div style="width:62%;display: block;margin-left: 0;float:right;height: 360px;box-sizing: content-box">
+        <div style="text-align:center;margin:10px 0;">
+            <img
+                 src="{{var logo_url}}"
+                 style="height:40px" />
+        </div>        
+        <div style="width:90%; float: left; margin: 0 15px;font-size: 14px;">
+            <span data-bind="style: {color: textColor}"  
+                style="color:#{{var textColor}}; margin-right:15px; overflow:hidden; display:block; float:none; margin-bottom:5px;">
+                <label style="font-weight: 600;">From:</label>
+                <span data-bind="style: {color: styleColor}, text: senderName"
+                      style="color:#{{var styleColor}};">{{var senderName}}</span>
+            </span>
+            <span data-bind="style: {color: textColor}"  
+                style="color:#{{var textColor}}; margin-right:15px; overflow:hidden; display:block;float: none;margin-bottom:5px;">
+                <label style="font-weight: 600;">To:</label>
+                <span data-bind="style: {color: styleColor}, text: recipientName"
+                      style="color:#{{var styleColor}};">{{var recipientName}}</span>
+            </span>
+        </div>
+        <div style="width:90%;float:left;margin:0 15px;overflow:hidden;font-style:italic;">
+            <div style="display: block;border-radius:5px;border:1px solid #cccccc;padding:0 6px;height:75px;vertical-align:middle;background:#fff;margin-top:5px;">
+                <div style="max-height:65px;overflow:hidden;font-size:12px;">
+                    <p data-bind="text: giftMessage,style: {color: textColor}"
+                       style="color:#{{var textColor}};">
+                        {{var giftMessage}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div style="width:90%;float:left;margin:15px;margin-bottom:5px;">
+            <div style="float:left">
+                <span data-bind="text: giftValue, style: {color: styleColor}"
+                    style="color:#{{var textColor}};float:left;clear:both;font-size:26px;font-weight:bold;margin-top:10px">{{var giftValue}}</span>
+            </div>
+            <div style="float:right;width:55%;margin-top:-5px;">            
+                <span style="width: 100%;float: right;text-align:right;margin-bottom:5px;">                    
+                    <span data-bind="style: {color: styleColor}"
+                          style="color:#{{var styleColor}};">
+                        <span data-bind="text: giftCode">{{var giftCode}}</span>
+                    </span>
+                </span>
+                <span style="float: right;width:177px;text-align:right;">
+                    <img style="float:right;max-width:100%;height:40px;" 
+                         data-bind="attr: {src: barcodeUrl}" src="{{var barcodeUrl}}" />
+                    <!-- ko if: expiredDate-->
+                    <div data-bind="text: expiredDate, style: {color: textColor}" 
+                         style="color:#{{var textColor}};text-align:center;font-size:12px;float:right;">
+                        {{if expiredDate}} Expired: {{var expiredDate}} {{/if}}
+                    </div>
+                    <!-- /ko -->                    
+                </span>
+            </div>
+        </div>
+        <div style="width:90%;float:left;margin:0 15px;overflow: hidden;vertical-align: bottom;height: 70px;">
+            <p data-bind="style: {color: textColor}, text: notes"
+               style="color:#{{var textColor}};font-size: 12px;font-style:italic;">
+                {{var notes}}
+            </p>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+</div> 

@@ -1,0 +1,44 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magestore\Giftvoucher\Block\Account\Add $block
+ * @var \Magestore\Giftvoucher\Block\Account\Add $this
+ */
+
+?>
+<div class="gift-card">
+    <form id="add-giftvoucher-code" method="post" action="<?php echo $block->getFormActionUrl() ?>">
+        <fieldset class="fieldset info">
+            <?php echo $block->getBlockHtml('formkey') ?>
+            <legend class="legend"><span><?php echo __('Add a Gift Card') ?></span></legend><br>
+
+            <div class="field giftvouchercode required">
+                <label class="label" for="email"><span><?php echo __('Enter Gift Card Code') ?></span></label>
+                <div class="control">
+                    <input name="giftvouchercode" id="gift-voucher-code" value="" title="<?php echo __('Enter Gift Card Code') ?>>" class="input-text required-entry form-control" type="text">
+                </div>
+            </div>
+        </fieldset>
+        
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button id="giftvoucher-addlist-button" type="submit" title="<?php echo __('Add To Your List') ?>" class="action primary"><span><?php echo __('Add To Your List') ?></span></button>
+            </div>
+            <div class="form-group">
+                <p class="back-link"><a href="<?php echo $block->getBackUrl() ?>"><small>« </small><?php echo __('Back') ?></a></p>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "mage/mage"
+    ], function ($) {
+        $('#add-giftvoucher-code').mage('validation', {});
+    });
+</script>

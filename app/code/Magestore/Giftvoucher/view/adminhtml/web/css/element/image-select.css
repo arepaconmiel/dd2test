@@ -1,0 +1,48 @@
+/*
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+.image-select {
+	margin: 0 0 -15px 0;
+	line-height: 0;
+	list-style: none;
+}
+
+.image-select__item {
+	display: inline-block;
+	margin: 0 15px 15px 0;
+}
+
+.image-select__radio {
+	position: absolute;
+	margin: -1px;
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.image-select__image {
+	border: 2px solid #ccc;
+	cursor: pointer;
+}
+
+.image-select__image:hover {
+    opacity: 0.6;
+    filter:alpha(opacity=60);
+}
+
+.image-select__radio:checked + .image-select__image {
+	border: 2px solid #e47911;
+}
+
+.image-select__radio:focus + .image-select__image {
+	border: 2px solid #007bdb;
+}
+
+.image-select__radio:disabled + .image-select__image {
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}

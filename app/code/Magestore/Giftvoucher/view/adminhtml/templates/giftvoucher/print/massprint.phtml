@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © 2017 Magestore. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magestore\Giftvoucher\Block\Adminhtml\Giftvoucher\View $this
+ */
+
+?>
+<style>
+    .giftcode-print-page {
+        margin: 22px;
+    }
+    @media print {
+        .giftcode-print-page {
+            margin: 0 0 22px 0;
+            page-break-inside: avoid;
+        }
+        .giftcode-print-page:last-of-type {
+            margin: 0;
+        }
+    }
+</style>
+
+<?php foreach ($this->getGiftVouchers() as $giftCode): ?>
+	<div class="giftcode-print-page">
+		<?php echo $this->printGiftcodeHtml($giftCode); ?>
+	</div>
+<?php endforeach; ?>
+
+<script type="text/javascript">window.print();</script>

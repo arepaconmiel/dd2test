@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright © 2017 Magestore. All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <title>Gift Card</title>
+        <css src="Magestore_Giftvoucher::css/magestore/giftvoucher.css"/>
+    </head>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Gift Card</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magestore\Giftvoucher\Block\Account\View" name="giftvoucher_account_view" template="giftvoucher/account/view.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>
