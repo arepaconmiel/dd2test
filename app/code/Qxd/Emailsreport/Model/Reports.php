@@ -179,9 +179,7 @@ class Reports extends \Magento\Framework\Model\AbstractModel
 
                     try
                     {
-                        $result = $mandrillApiInstance->messages->sendTemplate("Reward Statement", array(array()), $email, $async = false, $ip_pool = null, $send_at = null); //$scheduleDate
-
-                        $logger->info(print_r($result, true));
+                        $result = $mandrillApiInstance->messages->sendTemplate("Reward Statement", array(array()), $email, $async = false, $ip_pool = null, $scheduleDate); //$scheduleDate
 
                         if(isset($result[0]['status']) &&
                             ($result[0]['status']=='scheduled' ||  $result[0]['status']=='queued' ||  $result[0]['status']=='sent'))
@@ -202,6 +200,7 @@ class Reports extends \Magento\Framework\Model\AbstractModel
                             }
                             $logger->info("EMAIL NOT SENT");
                         }
+                        $logger->info(print_r($result, true));
 
                     } catch(Mandrill_Error $e)
                     {   
