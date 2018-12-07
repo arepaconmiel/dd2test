@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/qxd/webservice/createShipmentTracking" method="POST">
+        <service class="Qxd\Extendsalesapi\Api\WebServiceRepositoryInterface" method="createShipmentTracking"/>
+        <resources>
+            <resource ref="Qxd_Extendsalesapi::webapi"/>
+        </resources>
+    </route>
+
+    <route url="/V1/qxd/webservice/createInvoiceCapture" method="POST">
+        <service class="Qxd\Extendsalesapi\Api\WebServiceRepositoryInterface" method="createInvoiceCapture"/>
+        <resources>
+            <resource ref="Qxd_Extendsalesapi::webapi"/>
+        </resources>
+    </route>
+</routes>
