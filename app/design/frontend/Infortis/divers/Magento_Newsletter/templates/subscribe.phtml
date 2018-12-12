@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Newsletter\Block\Subscribe $block */
+?>
+
+<div class="container">
+
+    <div class="dd-container-offers dd-container">
+        <span>Get hot deals & exclusive offers!</span>
+    </div>
+
+    <div class="block block-subscribe dd-container">
+        <div class="block-title">
+        </div>
+        <form class="form subscribe"
+            novalidate
+            action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+            method="post"
+            data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+            id="newsletter-validate-detail">
+            <div class="block-content">
+                <div class="input-box">
+                    <label for="newsletter" title="Sign up for our newslette"><?= $block->escapeHtml(__('Sign up for our newsletter')) ?></label>
+                   
+                    <input name="email" type="email" id="newsletter"
+                                placeholder="<?= $block->escapeHtml(__('Sign up for our newsletter')) ?>"
+                                data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+                <div class="actions">
+                    <button class="action subscribe button" title="<?= $block->escapeHtmlAttr(__('Subscribe')) ?>" type="submit">
+                        <span>
+                            <span class="text"><?= $block->escapeHtml(__('Sign up for our newsletter')) ?></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="dd-social dd-container">
+        <a href="https://instagram.com/diversdirect" title="Instagram"><span class="dd-instragram"><span class="text"><?= $block->escapeHtml(__('Go to Instagram'));?></span></span></a>
+        <a href="https://plus.google.com/+DiversDirectScubaUSA" title="Google Plus"><span class="dd-google"><span class="text"><?= $block->escapeHtml(__('Go to Google Plus'));?></span></span></a>
+        <a href="https://www.facebook.com/diversdirect" title="Facebook"><span class="dd-facebook"><span class="text"><?= $block->escapeHtml(__('Go to Facebook'));?></span></span></a>
+        <a href="https://twitter.com/diversdirect" title="Twitter"><span class="dd-twitter"><span class="text"><?= $block->escapeHtml(__('Go to Twitter'));?></span></span></a>
+        <a href="https://www.youtube.com/user/DiversDirectTV" title="Youtube"><span class="dd-youtube"><span class="text"><?= $block->escapeHtml(__('Go to Youtube'));?></span></span></a>
+        <a href="https://www.pinterest.com/diversdirect/"title="Pinterest"><span class="dd-pinterest"><span class="text"><?= $block->escapeHtml(__('Go to Pinterest'));?></span></span></a>
+    </div>
+
+</div>

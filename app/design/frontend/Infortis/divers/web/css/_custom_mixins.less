@@ -1,0 +1,46 @@
+
+//
+// VARIABLES
+// --------------------------------------------------
+// se incluyen algunas variables de bootstrap aca
+
+@btn-primary-color:  #fff !default;
+@btn-primary-bg: #ed1c24 !default;
+@btn-primary-border: #e20d15 !default;
+
+@prod-img-border-color: #d4d4d4 !default;
+@well-bg-color:#f3f3f3 !default;
+@location-bg-color:#0c6bae !default;
+
+//
+// MIXINS
+// --------------------------------------------------
+
+.mixin_border-radius(@radius) {
+  border-radius:@radius;
+  -webkit-border-radius:@radius;
+  -moz-border-radius:@radius;
+  -o-border-radius:@radius;
+}
+.mixin_box-shadow(@shadow) {
+  box-shadow:@shadow;
+  -webkit-box-shadow:@shadow;
+  -moz-box-shadow:@shadow;
+  -o-box-shadow:@shadow;
+}
+.mixin_img-responsive {
+  display:block;
+  max-width:100%;
+  margin-right:auto;
+  margin-left:auto;
+}
+
+.mixin_btn {
+  font-size:14px;
+  font-weight:bold;
+  padding:4px 12px;
+}
+.mixin_btn-lg {
+  font-size:16px;
+  padding:6px 13px;
+}

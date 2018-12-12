@@ -1,0 +1,160 @@
+<footer>
+    <div class="site-footer">
+
+        <div class="col-md-12 dd-newsletter">
+            <?php 
+                echo $block->getChildHtml('subscribe');
+                //echo $this->getChildHtml('newsletter')
+            ?>
+        </div>
+
+        <div class="site-footer-main">
+            <div class="sp-block-info">
+
+                <?php echo  $block->getCmsBlock('footer-links'); ?>
+  
+                <div class="copyright-info container">
+                    <address>
+                        <img src='<?php echo $this->getViewFileUrl('images/desktop_footer.png'); ?>' alt="Divers Direct">
+                        <?php echo $block->getChildHtml('copyright') ?>
+                        <div class="privacy">
+                            <span class="separator hidden-xs">|</span>
+                            <a href="<?php echo $block->getBaseUrl()?>privacy-statement">
+                                <?php echo __('Privacy Statement')?>
+                            </a>
+                            <span class="separator">|</span>
+                            <a href="<?php echo $block->getBaseUrl()?>terms-of-use">
+                                <?php echo __('Terms of Use (Web)')?>
+                            </a>
+                        </div>
+                    </address>
+                </div>
+            </div>
+        </div>
+
+        <a id="scroll-to-top" class="ic ic-up" href="#top"></a>
+    </div>
+
+    <script type="text/javascript">
+
+        require(['jquery', 'jquery/ui'], function($){ 
+
+
+            function displayContent(){
+                $(".page-content").animate({
+                    left: '+=210'
+                }, 350)
+
+                $(".col-left.sidebar").animate({
+                    left: '+=210'
+                }, 0)
+            }
+
+            function displayContentOff(){
+                $(".page-content").animate({
+                    left: '-=210'
+                }, 350)
+                $(".col-left.sidebar").animate({
+                    left: '-=210'
+                }, 0)
+            }
+
+            $('.show-filter').on('click', function(){
+                $('.catalog-category-view').addClass('show-filter-on');
+                $('.shopbybrand-index-view').addClass('show-filter-on');
+                $('.dark-shadow').addClass('set-filter');
+                displayContent();
+            });
+
+
+            $('.close-filter').on('click', function(){
+                if($('.catalog-category-view').hasClass('show-filter-on') || $('.shopbybrand-index-view').hasClass('show-filter-on')){
+                    $('.dark-shadow').removeClass('set-filter');
+                    displayContentOff();
+                    $('.catalog-category-view').removeClass('show-filter-on');
+                    $('.shopbybrand-index-view').removeClass('show-filter-on');
+                }
+            });
+
+
+
+            $('.dark-shadow').on('click', function(){
+
+                if($('.catalog-category-view').hasClass('show-filter-on') || $('.shopbybrand-index-view').hasClass('show-filter-on')){
+                    displayContentOff();
+                    $('.catalog-category-view').removeClass('show-filter-on');
+                    $('.shopbybrand-index-view').removeClass('show-filter-on');
+                }else{
+                    $('body').removeClass('mobile-sidebar-opened-on');
+                    $('body').addClass('mobile-sidebar-closed-off');
+
+                    $(".page-content").animate({
+                        left: '-=210'
+                    }, 350)
+
+                    $(".mobile-sidebar").animate({
+                        left: '-=210'
+                    }, 350)
+                }
+
+            });
+
+
+
+
+            if ($('#back-to-top').length) {
+
+                var scrollTrigger = 100, // px
+                    backToTop = function () {
+                        var scrollTop = $(window).scrollTop();
+                        if (scrollTop > scrollTrigger) {
+                            $('#back-to-top').addClass('show');
+                        } else {
+                            $('#back-to-top').removeClass('show');
+                        }
+                    };
+                backToTop();
+                $(window).on('scroll', function () {
+                    backToTop();
+                });
+                $('#back-to-top').on('click', function (e) {
+                    e.preventDefault();
+                    jQuery('html,body').animate({
+                        scrollTop: 0
+                    }, 1000);
+                });
+            }
+
+            /*}*/
+
+            /*backButton();
+
+             jQuery( window ).scroll(function() {
+             backButton();
+
+             });*/
+
+        });
+
+    </script>
+
+
+
+    <!-- google trusted store -->
+    <script type="text/javascript">
+        //<![CDATA[
+        /*gts.push(["google_base_subaccount_id", "5953260"]);
+        gts.push(["google_base_country", "US"]);
+        gts.push(["google_base_language", "en"]);
+
+        (function() {
+            var gts = document.createElement("script");
+            gts.type = "text/javascript";
+            gts.async = true;
+            gts.src = "https://www.googlecommerce.com/trustedstores/api/js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(gts, s);
+        })();*/
+        //]]>
+    </script>
+</footer>

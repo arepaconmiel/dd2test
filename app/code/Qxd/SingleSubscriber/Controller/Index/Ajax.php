@@ -21,8 +21,8 @@ class Ajax extends \Magento\Framework\App\Action\Action
 		//return $this->_pageFactory->create();
 		$cookie = isset($_COOKIE['popup-shown']) ? $_COOKIE['popup-shown'] : "";
 		if (!$cookie) {
-			//setcookie('popup-shown', 'true', time() + 604800, "/");
-			setcookie('popup-shown', 'true', time() + 60, "/");
+			setcookie('popup-shown', 'true', time() + 604800, "/");
+			//setcookie('popup-shown', 'true', time() + 60, "/");
 		}
 		//return 'var check_cookie = '.$cookie;
 		//$this->getResponse()->setBody($cookie);

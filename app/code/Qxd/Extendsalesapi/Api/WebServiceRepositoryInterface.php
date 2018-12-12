@@ -9,20 +9,27 @@ interface WebServiceRepositoryInterface
     
     /**
     * @param string $sessionId
-    * @param string $customerId
-    * @param int $points
+    * @param string $orderIncrementId
+    * @param mixed $itemsQty
+    * @param string $comment
+    * @param int $email
+    * @param boolean $includeComment
+    * @param mixed $tracking
     * 
     * @return mixed
     */
-    public function createShipmentTracking($sessionId, $customerId, $points);
+    public function createShipmentTracking($sessionId, $orderIncrementId, $itemsQty = array(), $comment = null, $email = false, $includeComment = false,$tracking = array());
 
     /**
     * @param string $sessionId
-    * @param string $customerId
-    * @param int $points
+    * @param string $invoiceIncrementId
+    * @param mixed $itemsQty
+    * @param string $comment
+    * @param int $email
+    * @param boolean $includeComment
     * 
     * @return mixed
     */
-    public function createInvoiceCapture($sessionId, $customerId, $points);
+    public function createInvoiceCapture($sessionId, $invoiceIncrementId, $itemsQty, $comment = null, $email = false, $includeComment = false);
 
 }

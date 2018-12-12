@@ -1,0 +1,110 @@
+@import '_bootstrap-variables.less';
+@import '_custom_mixins.less';
+
+* {
+  box-sizing: border-box;
+}
+
+dd{
+  margin-bottom: 0;
+}
+
+
+/* Footer */
+.meet-the-team {
+  .img {
+    img {
+      padding:15px 0 15px 15px;
+    }
+  }
+}
+.site-footer {
+  margin-top:20px;
+  color:#fff;
+  a {
+    color:#fff !important;
+    opacity:.8;
+  }
+  li {
+    a {
+      display:block;
+    }
+  }
+  .locations-list {
+    > .container {
+      padding:25px 30px;
+      a { color:#fff; }
+    }
+    .title {
+      display:block;
+      margin-bottom:10px;
+      font-size:16px;
+      font-weight:300;
+      text-transform:uppercase;
+    }
+    ul {
+      .item {
+        margin-bottom:0;
+        .location-thumbnail {
+          margin-bottom:5px;
+          border:2px solid #374858;
+          .mixin_img-responsive;
+        }
+      }
+    }
+  }
+  .site-footer-main {
+    > .container {
+      padding:25px 30px;
+      .block-subscribe {
+        padding:15px 20px;
+        .block-title {
+          height:32px;
+          background:url(../images/searascal_logo.png) no-repeat;
+          text-indent:-9999em;
+        }
+        label {
+          margin:3px 0;
+          font-weight:normal;
+        }
+        button { 
+          border:none;
+          padding:5px 13px;
+          color:#fff; 
+          font-weight:bold; 
+        }
+      }
+      .footer-social-links {
+        margin-top:7px;
+        padding:8px 20px;
+        color:#fff;
+        strong { 
+          float:left; 
+          margin-top:4px; 
+          margin-right:4px;
+        }
+        a { 
+          float:left;
+          .mixin_border-radius(30px);
+          margin-left:6px;
+          width:30px;
+          height:30px;
+          background:#fff;
+          font-size:15px;
+          line-height:33px;
+          text-align:center;
+          opacity:1;
+        }
+      }
+      .copyright-info { margin-top:25px; }
+    }
+  }
+  .separator {
+    padding-left:8px;
+    padding-right:8px;
+    font-size:.7em;
+    opacity:.5; 
+    vertical-align:middle;
+    line-height:10px;
+  }
+}
