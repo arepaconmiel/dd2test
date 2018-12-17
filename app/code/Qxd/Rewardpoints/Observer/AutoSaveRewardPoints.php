@@ -10,9 +10,11 @@ class AutoSaveRewardPoints implements ObserverInterface
 {
 
     public function __construct(
-        \Qxd\Rewardpoints\Helper\Data $helper
+        \Qxd\Rewardpoints\Helper\Data $helper,
+        \Magento\Catalog\Model\ProductFactory $productFactory
     ) {
         $this->_helper = $helper;
+        $this->_productFactory = $productFactory;
     }
 
     /*
@@ -22,9 +24,10 @@ class AutoSaveRewardPoints implements ObserverInterface
 
     public function execute(Observer $observer)
     {   
+        $productObserver = $observer->getProduct();
+        $productId = $productObserver->getId();
 
-        $product = $observer->getProduct();
-        $productId = $product->getId();
+        $product = $this->_productFactory->create()->load($productId);
 
         $type = $product->getTypeId();
         $price = $this->_helper->returnRewardPointsForProducts($product);
