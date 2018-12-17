@@ -20,7 +20,7 @@
                     </field>
 
                     <field id="emailsreport_generate_reports" translate="label" type="button" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="0">
-                        <label>Synchronize Media</label>
+                        <label>Generate and Send Reports</label>
                         <frontend_model>Qxd\Emailsreport\Block\System\Config\Form\Reportbutton</frontend_model>
                     </field>
                 </group>
