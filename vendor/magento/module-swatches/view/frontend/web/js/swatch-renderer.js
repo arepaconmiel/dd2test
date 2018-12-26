@@ -950,7 +950,6 @@ define([
                 }
              }else{
                 
-
                 $('[data-price-type="finalPrice"]').hide();
                 $('.regular-range').show();
                 $('.special-range').show();

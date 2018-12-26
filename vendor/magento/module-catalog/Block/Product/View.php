@@ -193,7 +193,6 @@ class View extends AbstractProduct implements \Magento\Framework\DataObject\Iden
             $tierPrices[] = $tierPrice['price']->getValue();
         }
 
-
         //qxd testing lo de los productos */
 
         $qxd_config = null;
