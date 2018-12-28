@@ -4,19 +4,19 @@ namespace Qxd\Onsale\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {   
     public function __construct(
-        \Magento\Catalog\Model\Product $product,
-        \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurableProduct,
+        \Magento\Catalog\Model\ProductFactory $productFactory,
         \Magento\Framework\App\ResourceConnection $resource,
         \Magento\Catalog\Api\CategoryLinkManagementInterface $categoryLinkManagement,
         \Magento\Catalog\Api\CategoryLinkRepositoryInterface $categoryLinkRepository,
-        \Magento\Customer\Model\Session $customerSession
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistryInterface
     ) {
-        $this->_product = $product;
-        $this->_configurableProduct = $configurableProduct; 
+        $this->_product = $productFactory;
         $this->_resource = $resource;
         $this->_categoryLinkManagement = $categoryLinkManagement;
         $this->_categoryLinkRepository = $categoryLinkRepository;
         $this->_customerSession = $customerSession;
+        $this->_stockRegistryInterface = $stockRegistryInterface;
     }
 
     /*public function getOnSaleUrl()
@@ -72,7 +72,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
             if($type == 'configurable')
             {
-                $simpleProducts = $this->_configurableProduct->getUsedProductCollection($product)->addAttributeToSelect('*')->addFilterByRequiredOptions();
+                $simpleProducts = $product->getTypeInstance()->getUsedProducts($product);
 
                 foreach($simpleProducts as $simpleProduct)
                 { if($this->verifySpecialPrice($simpleProduct,$type,$currentDateTime)){ $add=true; } }
@@ -85,21 +85,22 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                     $querySelectParent="SELECT parent_id FROM  `catalog_product_super_link` WHERE  `product_id` =".$productId;
                     $parentId = $connection->fetchOne($querySelectParent);
 
-                    $logger->info('aca1');
-                    $logger->info(print_r($parentId, true));
-
                     if($parentId)
                     {
                         $productId=$parentId;
-                        $parentProduct = $this->_product->load($parentId);
+                        $parentProduct = $this->_product->create()->load($parentId);
                         $finalProduct = $parentProduct;
                         $productSku = $parentProduct->getSku();
                         $categories = $parentProduct->getCategoryIds();
 
-                        $simpleProducts = $this->_configurableProduct->getUsedProductCollection()->addAttributeToSelect('*')->addFilterByRequiredOptions();
+                        $simpleProducts = $parentProduct->getTypeInstance()->getUsedProducts($parentProduct);
 
                         foreach($simpleProducts as $simpleProduct)
-                        { if($this->verifySpecialPrice($simpleProduct,$type,$currentDateTime)){ $add=true; } }
+                        { 
+                            if($this->verifySpecialPrice($simpleProduct,$type,$currentDateTime)){ 
+                                $add=true; 
+                            } 
+                        }
                     }else{ $add=false; }
                 }
             }
@@ -134,10 +135,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
         $inStock=false;
 
-        if($product->getExtensionAttributes()->getStockItem()) { 
+        $inventory=$this->_stockRegistryInterface->getStockItem($product->getId());
+        $inStock = $inventory->getIsInStock();
+  
+        /*if($product->getExtensionAttributes()->getStockItem()) { 
             $logger->info(print_r('entre',true));
             $inStock = $product->getExtensionAttributes()->getStockItem()->getIsInStock(); 
-        }
+        }*/
 
         if($inStock && $product->getData('special_price') && ( (($product->getData('special_price') < $product->getData('price')) && $productType!='bundle') || $productType=='bundle' ))
         {

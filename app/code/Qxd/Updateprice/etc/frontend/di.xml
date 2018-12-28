@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox" type="Qxd\Updateprice\Model\ConfigurableProduct\Pricing\Render\FinalPriceBox" />
+    <preference for="Magento\Framework\Pricing\Render\Amount" type="Qxd\Updateprice\Model\Framework\Pricing\Render\Amount" />
+    <preference for="Magento\Catalog\Block\Product\View" type="Qxd\Updateprice\Model\Catalog\Block\Product\View" />
+    <preference for="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable" type="Qxd\Updateprice\Model\ConfigurableProduct\Block\Product\View\Type\Configurable" />
+</config>

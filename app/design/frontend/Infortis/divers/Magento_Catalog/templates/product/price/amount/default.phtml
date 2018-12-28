@@ -1,0 +1,78 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+<?php /** @var \Magento\Framework\Pricing\Render\Amount $block */ ?>
+
+<span class="josesin price-container <?= /* @escapeNotVerified */ $block->getAdjustmentCssClasses() ?>"
+        <?= $block->getSchema() ? ' itemprop="offers" itemscope itemtype="http://schema.org/Offer"' : '' ?>>
+
+    <?php 
+        $customPriceInformation = $block->getCustomPriceConfig(); 
+        $showRegular = false;
+        $showSpecial = false;
+
+
+    ?>
+ 
+    <?php if($customPriceInformation != null) : ?>
+
+        <!-- QXD price -->
+        <span class="regular-range"> 
+            <!-- validate if showthe labels is necesary acording with the data -->
+            <?php if($customPriceInformation['hasSpecialPrice']): ?><?php echo __('Regular Price: ') ?><?php endif; ?>
+            <span
+                data-price-type="<?= /* @escapeNotVerified */ $block->getPriceType() ?>-regular-range"
+                class="price-wrapper <?= /* @escapeNotVerified */ $block->getPriceWrapperCss() ?>"
+            ></span>
+        </span>
+
+        <?php if($customPriceInformation['hasSpecialPrice']): ?>
+            <span class="special-range"><?php echo __('Special Price: ') ?>
+                <span 
+                    data-price-type="<?= /* @escapeNotVerified */ $block->getPriceType() ?>-special-range"
+                    class="price-wrapper <?= /* @escapeNotVerified */ $block->getPriceWrapperCss() ?>"
+                ></span>
+            </span>
+        <?php endif; ?>
+    <?php endif; ?>
+
+
+    <?php if ($block->getDisplayLabel()): ?>
+        <!-- ocultando label -->
+        <?php if($block->getSaleableItem()->getTypeId() != "configurable"): ?>
+            <!--<span class="price-label"><?= /* @escapeNotVerified */ $block->getDisplayLabel() ?>:</span>-->
+        <?php endif;?>
+    <?php endif; ?>
+
+
+  
+        <span style="font-size:14px; <?php if($block->getSaleableItem()->getTypeId() == "configurable"): ?> display: none; <?php endif; ?>" custom-label="<?= /* @escapeNotVerified */ $block->getPriceType() ?>">
+            <?php if ($block->getDisplayLabel()): ?>
+                <?= /* @escapeNotVerified */ $block->getDisplayLabel() ?>
+            <?php endif; ?>
+
+        </span>
+
+  
+
+    <span <?php if ($block->getPriceId()): ?> id="<?= /* @escapeNotVerified */ $block->getPriceId() ?>"<?php endif;?>
+        <?= ($block->getPriceDisplayLabel()) ? 'data-label="' . $block->getPriceDisplayLabel() . $block->getPriceDisplayInclExclTaxes() . '"' : '' ?>
+        data-price-amount="<?= /* @escapeNotVerified */ $block->getDisplayValue() ?>"
+        data-price-type="<?= /* @escapeNotVerified */ $block->getPriceType() ?>"
+        class="price-wrapper <?= /* @escapeNotVerified */ $block->getPriceWrapperCss() ?>"
+    ><?= /* @escapeNotVerified */ $block->formatCurrency($block->getDisplayValue(), (bool)$block->getIncludeContainer()) ?></span>
+    <?php if ($block->hasAdjustmentsHtml()): ?>
+        <?= $block->getAdjustmentsHtml() ?>
+    <?php endif; ?>
+    <?php if ($block->getSchema()): ?>
+        <meta itemprop="price" content="<?= /* @escapeNotVerified */ $block->getDisplayValue() ?>" />
+        <meta itemprop="priceCurrency" content="<?= /* @escapeNotVerified */ $block->getDisplayCurrencyCode() ?>" />
+    <?php endif; ?>
+</span>
