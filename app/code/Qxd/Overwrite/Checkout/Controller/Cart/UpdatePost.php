@@ -9,7 +9,30 @@ namespace Qxd\Overwrite\Checkout\Controller\Cart;
 use Magento\Checkout\Model\Cart\RequestQuantityProcessor;
 
 class UpdatePost extends \Magento\Checkout\Controller\Cart\UpdatePost
-{
+{   
+
+    public function __construct(
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Checkout\Model\Session $checkoutSession,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        \Magento\Checkout\Model\Cart $cart,
+        RequestQuantityProcessor $quantityProcessor = null
+    ) {
+        parent::__construct(
+            $context,
+            $scopeConfig,
+            $checkoutSession,
+            $storeManager,
+            $formKeyValidator,
+            $cart,
+            $quantityProcessor
+        );
+
+        $this->customQuantityProcessor = $quantityProcessor ?: $this->_objectManager->get(RequestQuantityProcessor::class);
+    }
+
 
 	/**
      * Update customer's shopping cart
@@ -24,7 +47,7 @@ class UpdatePost extends \Magento\Checkout\Controller\Cart\UpdatePost
                 if (!$this->cart->getCustomerSession()->getCustomerId() && $this->cart->getQuote()->getCustomerId()) {
                     $this->cart->getQuote()->setCustomerId(null);
                 }
-                $cartData = $this->quantityProcessor->process($cartData);
+                $cartData = $this->customQuantityProcessor->process($cartData);
                 $cartData = $this->cart->suggestItemsQty($cartData);
                 $this->cart->updateItems($cartData)->save();
 

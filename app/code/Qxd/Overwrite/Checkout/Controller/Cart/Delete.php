@@ -7,7 +7,7 @@
 namespace Qxd\Overwrite\Checkout\Controller\Cart;
 
 class Delete extends \Magento\Checkout\Controller\Cart\Delete
-{
+{   
 	/**
      * Delete shopping cart item action
      *
@@ -22,6 +22,12 @@ class Delete extends \Magento\Checkout\Controller\Cart\Delete
         $id = (int)$this->getRequest()->getParam('id');
         if ($id) {
             try {
+
+                $quoteItem = null;
+                if($this->_checkoutSession->getConfigurableDiscountCurrentSku()){
+                    $quoteItem = $this->cart->getQuote()->getItemById($id);
+                }
+
                 $this->cart->removeItem($id)->save();
 
                 $cartCouponCode = $this->cart->getQuote()->getCouponCode();
@@ -34,6 +40,24 @@ class Delete extends \Magento\Checkout\Controller\Cart\Delete
                 if(strtolower($cartCouponCode) === strtolower($couponRequired)){  
                 	$this->_checkoutSession->setCartGiftRemoved(true); 
                 }
+
+                // check if a product with a discoutn is eliminated from the cart (salesrule module)
+                if($this->_checkoutSession->getConfigurableDiscountCurrentSku() && $quoteItem){
+
+                    $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/custom_discount.log');
+                    $logger = new \Zend\Log\Logger();
+                    $logger->addWriter($writer);
+                    $logger->info(print_r('pase', true));
+                    $logger->info(print_r($quoteItem->getSku(), true));
+
+                    if($this->_checkoutSession->getConfigurableDiscountCurrentSku() == $quoteItem->getSku()){
+                        $logger->info(print_r('refresh', true));
+                        $this->_checkoutSession->unsConfigurableDiscountAlreadyApplied();
+                        $this->_checkoutSession->unsConfigurableDiscountCurrentSku();
+                    }
+                }
+
+
             } catch (\Exception $e) {
                 $this->messageManager->addError(__('We can\'t remove the item.'));
                 $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);
