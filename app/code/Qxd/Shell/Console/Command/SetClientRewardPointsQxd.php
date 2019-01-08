@@ -48,7 +48,7 @@ class SetClientRewardPointsQxd extends Command
 
             $fileName="drpointsbalance.csv";
             $fromPath=$this->_directoryList->getRoot()."/feeds/";
-            $toPath=$this->_directoryList->getRoot('var')."/QXD_import/RewardPoints_Processed/";
+            $toPath=$this->_directoryList->getPath('var')."/QXD_import/RewardPoints_Processed/";
             $updated=array();
             $errors=array();
 
@@ -107,7 +107,7 @@ class SetClientRewardPointsQxd extends Command
                 }
             }
             rename($fromPath.$fileName, $toPath.date('m-d-Y h:i:s').$fileName);
-            /*$emailBody="Points Processed ".count($updated)."\n\n";
+            $emailBody="Points Processed ".count($updated)."\n\n";
             $emailBody=$emailBody.implode("\n",$updated);
 
             $emailBody="\n\n\n\n";
@@ -118,7 +118,8 @@ class SetClientRewardPointsQxd extends Command
             $emailResult = wordwrap($emailBody, 70);
             $from='magenotify@diversdirect.com';
             $subject='Customer Points Import Finish, File: Date:'.date('m-d-Y h:i:s');
-            mail("magenotify@diversdirect.com",$subject,$emailResult,"From: $from\n");*/
+            mail("magenotify@diversdirect.com",$subject,$emailResult,"From: $from\n");
+            //mail("jvillalobos@qxdev.com",$subject,$emailResult,"From: $from\n");
 
         }catch(Exception $e){ $logger->info($e->getMessage()); }
         catch(mysqli_sql_exception $e){ $logger->info($e->getMessage()); }

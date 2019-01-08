@@ -53,7 +53,7 @@ class ImportCertificates extends Command
             $store = $this->_storeManager->getStore();
 
             $fromPath=$this->_directoryList->getRoot()."/hidden_feeds/";
-            $toPath=$this->_directoryList->getRoot()."/QXD_import/Certificates_Processed/";
+            $toPath=$this->_directoryList->getPath('var')."/QXD_import/Certificates_Processed/";
 
             $arrayFileParsed=array();
             $emails=array();

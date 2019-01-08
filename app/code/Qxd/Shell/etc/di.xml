@@ -14,6 +14,9 @@
             <argument name="commands" xsi:type="array">
                 <item name="ImportCertificates" xsi:type="object">Qxd\Shell\Console\Command\ImportCertificates</item>
             </argument>
+            <argument name="commands" xsi:type="array">
+                <item name="ImportProductsQxd" xsi:type="object">Qxd\Shell\Console\Command\ImportProductsQxd</item>
+            </argument>
         </arguments>
     </type>
 </config>
