@@ -5,4 +5,8 @@
        <observer name="qxd_updateprice_product" instance="Qxd\Updateprice\Observer\Updateprice" />
    </event>
 
+   <event name="checkout_onepage_controller_success_action">
+       <observer name="qxd_updateprice_checkout" instance="Qxd\Updateprice\Observer\UpdatePriceCheckout" />
+   </event>
+
 </config>

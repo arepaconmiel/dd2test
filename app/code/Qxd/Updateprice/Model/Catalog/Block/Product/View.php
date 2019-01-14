@@ -61,7 +61,9 @@ class View extends \Magento\Catalog\Block\Product\View
                 break;
 
             case 'configurable':
-                $configurable_block= $this->getLayout()->createBlock('Magento\ConfigurableProduct\Block\Product\View\Type\Configurable');
+
+                $qxd_config = $price_config = json_decode($product->getPriceRangeConfig(), true); 
+                /*$configurable_block= $this->getLayout()->createBlock('Magento\ConfigurableProduct\Block\Product\View\Type\Configurable');
 
                 $configurable_config = $configurable_block->getJsonConfig();
                 if($configurable_config){
@@ -116,7 +118,7 @@ class View extends \Magento\Catalog\Block\Product\View
                     $qxd_config['hasSameRegularPrice'] = $hasSameRegularPrice; 
 
 
-                }
+                }*/
                 break;
             
             default:

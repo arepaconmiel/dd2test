@@ -1,0 +1,34 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xsearch
+ */
+?>
+<?php /** @var \Amasty\Xsearch\Block\Head $block */
+if ($block->getLayoutEnabled()) :?>
+    <style>
+        .amsearch-results .amsearch-item:hover {
+            background-color: #<?= $block->getLayoutHover()?> !important;
+        }
+
+        .amasty-xsearch-highlight{
+            background-color: #<?= $block->getLayoutHighlight()?> !important;
+            color: #<?= $block->getLayoutHoverText()?> !important;
+        }
+
+        .amsearch-results  {
+            background-color: #<?= $block->getLayoutBackground()?> !important;
+            border-top: 2px solid #<?= $block->getLayoutBorder()?> !important;
+        }
+
+        .search-autocomplete {
+            border: 1px solid #<?= $block->getLayoutBorder()?> !important;
+            color: #<?= $block->getLayoutText()?> !important;
+        }
+
+        .amsearch-item .item-name {
+            color: #<?= $block->getLayoutText()?> !important;
+        }
+    </style>
+<?php endif;?>

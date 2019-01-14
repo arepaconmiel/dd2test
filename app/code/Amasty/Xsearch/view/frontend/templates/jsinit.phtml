@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xsearch
+ */
+?>
+<?php
+/** @var \Amasty\Xsearch\Block\Jsinit $block */
+?>
+<script>
+    require([
+        'Amasty_Xsearch/js/autocomplete'
+    ], function (autoComplete) {
+        'use strict';
+        autoComplete.init(
+            '<?= $block->getUrl('amasty_xsearch/autocomplete/index')?>',
+            {
+                width: '<?= $block->escapeJsQuote($block->getWidth())?>',
+                minChars: '<?= $block->escapeJsQuote($block->getMinChars())?>'
+            },
+            '<?= $block->getCurrentUrlEncoded();?>');
+    })
+</script>
+<?php if ($block->isShowRecentPreload() || $block->isShowPopularPreload()) : ?>
+    <div id="amasty-xsearch-preload" class="amasty-xsearch-preload">
+        <?= $block->getPreload();?>
+    </div>
+<?php endif;?>

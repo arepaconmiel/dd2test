@@ -1,0 +1,39 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xsearch
+ */
+?>
+<?php
+/** @var array $data
+ *  @var \Amasty\Xsearch\Block\Search\AbstractSearch $block
+ */
+$data = $block->getResults();
+?>
+<?php if (!empty($data)) : ?>
+    <div class="amasty-xsearch-block-header">
+        <?= $block->escapeHtml($block->getTitle());?>
+    </div>
+
+    <?php foreach ($data as $item) :
+        /** @var array $item  = ['title' => string, 'name' => string, 'description' => string, 'url' => string, 'num_results' => string] */ ?>
+        <div class="amsearch-item"
+             data-search-block-type="<?= /* @escapeNotVerified */ $block->getBlockType();?>"
+             data-click-url="<?= /* @escapeNotVerified */ $item['url'] ?>">
+            <a href="<?= /* @escapeNotVerified */ $item['url'] ?>"
+               title="<?= /* @escapeNotVerified */ $block->stripTags($item['title']); ?>"
+               class="item-name" >
+                <?= /* @escapeNotVerified */ $item['name']; ?>
+            </a>
+            <?php if (isset($item['num_results'] )) :?>
+                <span class="amasty-xsearch-num-results"><?= $item['num_results'] ?></span>
+            <?php endif ?>
+            <?php if ($block->showDescription($item)) :?>
+                <div class="item-description">
+                    <?= /* @escapeNotVerified */ $item['description'] ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endforeach;?>
+<?php endif; ?>

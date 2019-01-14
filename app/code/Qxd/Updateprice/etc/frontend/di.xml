@@ -4,4 +4,6 @@
     <preference for="Magento\Framework\Pricing\Render\Amount" type="Qxd\Updateprice\Model\Framework\Pricing\Render\Amount" />
     <preference for="Magento\Catalog\Block\Product\View" type="Qxd\Updateprice\Model\Catalog\Block\Product\View" />
     <preference for="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable" type="Qxd\Updateprice\Model\ConfigurableProduct\Block\Product\View\Type\Configurable" />
+    <preference for="Amasty\Xsearch\Block\Search\Product" type="Qxd\Updateprice\Model\Amasty\Xsearch\Block\Search\Product" />
+    <preference for="Amasty\Xsearch\Model\Indexer\ElasticSearchProductDataMapper" type="Qxd\Updateprice\Model\Amasty\Xsearch\Model\Indexer\ElasticSearchProductDataMapper" />
 </config>

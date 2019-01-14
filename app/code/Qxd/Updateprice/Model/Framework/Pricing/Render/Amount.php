@@ -26,11 +26,15 @@ class Amount extends \Magento\Framework\Pricing\Render\Amount
         SaleableInterface $saleableItem = null,
         PriceInterface $price = null,
         array $data = [],
-        \Magento\Catalog\Pricing\Price\ConfiguredPriceSelection $configuredPriceSelection = null
+        \Magento\Catalog\Pricing\Price\ConfiguredPriceSelection $configuredPriceSelection = null,
+        \Magento\Framework\Json\EncoderInterface $jsonEncoder,
+        \Magento\Framework\App\ResourceConnection $resource
     ) {
         parent::__construct($context, $amount, $priceCurrency, $rendererPool, $saleableItem, $price, $data);
         $this->amount = $amount;
         $this->configuredPriceSelection = $configuredPriceSelection;
+        $this->_jsonEncoder = $jsonEncoder;
+        $this->_resource = $resource;
     }
 	// fucntion to get deafult ranges
     public function getCustomPriceConfig () {
@@ -38,10 +42,11 @@ class Amount extends \Magento\Framework\Pricing\Render\Amount
     	$product = $this->getSaleableItem();
         $qxd_config = null;
 
-        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/configurable.log');
+        /*$writer = new \Zend\Log\Writer\Stream(BP . '/var/log/configurable.log');
         $logger = new \Zend\Log\Logger();
         $logger->addWriter($writer);
-
+        $logger->info(print_r($product->getName(), true));
+        $logger->info(print_r($product->getId(), true));*/
         switch ($product->getTypeId()) {
             case 'bundle':     
                 //$bundle_block= $this->getLayout()->createBlock('Magento\Bundle\Block\Catalog\Product\View\Type\Bundle');
@@ -50,7 +55,9 @@ class Amount extends \Magento\Framework\Pricing\Render\Amount
                 break;
 
             case 'configurable':
-                $configurable_block= $this->getLayout()->createBlock('Magento\ConfigurableProduct\Block\Product\View\Type\Configurable',
+
+                $qxd_config = $price_config = json_decode($product->getPriceRangeConfig(), true);
+                /*$configurable_block= $this->getLayout()->createBlock('Magento\ConfigurableProduct\Block\Product\View\Type\Configurable',
 		        "",
 		        [
 		            'data' => [
@@ -117,7 +124,7 @@ class Amount extends \Magento\Framework\Pricing\Render\Amount
                     $qxd_config['testing'] = $this->hasSpecialPrice();
 
 
-                }
+                }*/
                 break;
             
             default:
@@ -127,6 +134,24 @@ class Amount extends \Magento\Framework\Pricing\Render\Amount
         return $qxd_config;
     }
 
+    public function testop(){
+        return $this->getRequest()->getFullActionName() ;
+    }
+
+    public function isProductPage(){
+        return ($this->getRequest()->getFullActionName() == 'catalog_product_view' || $this->getRequest()->getFullActionName() == 'checkout_cart_configure') ? true : false;
+    }
+
+    public function wrapPrice($price){
+        return '<span class="price">'.$this->formatPrice($price).'</span>';
+    }
+
+    public function formatPrice($price){
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+        $priceHelper = $objectManager->create('Magento\Framework\Pricing\Helper\Data');
+
+        return $priceHelper->currency($price , true, false);
+    }
 
 
     public function getCustomPriceType($priceCode)
